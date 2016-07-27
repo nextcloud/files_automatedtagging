@@ -37,6 +37,8 @@ class Application extends \OCP\AppFramework\App {
 	 */
 	public function registerHooksAndListeners() {
 		Util::connectHook('OC_Filesystem', 'preSetup', $this, 'addStorageWrapper');
+
+		\OCP\App::registerAdmin('files_automatedtagging', 'settings/admin');
 	}
 
 	/**
