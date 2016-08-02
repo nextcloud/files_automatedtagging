@@ -68,6 +68,10 @@ class CacheWrapper extends \OC\Files\Cache\Wrapper\CacheWrapper {
 		return $fileId;
 	}
 
+	/**
+	 * @param string $file
+	 * @return bool
+	 */
 	protected function isTaggingPath($file) {
 		$path = $this->mountPoint . $file;
 

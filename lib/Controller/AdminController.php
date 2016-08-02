@@ -25,12 +25,11 @@ use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http\TemplateResponse;
 use OCP\IL10N;
 use OCP\IRequest;
-use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class AdminController extends Controller {
 
-	/** @var EventDispatcher */
+	/** @var EventDispatcherInterface */
 	protected $eventDispatcher;
 	/** @var IL10N */
 	protected $l10n;
