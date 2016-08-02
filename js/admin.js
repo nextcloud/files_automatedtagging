@@ -45,6 +45,59 @@
 		});
 
 	/**
+	 * @class OCA.FilesAutomatedTagging.OperationView
+	 *
+	 * this creates the view for a single operation
+	 */
+	OCA.FilesAutomatedTagging.OperationView =
+		OCA.WorkflowEngine.OperationView.extend({
+			model: OCA.FilesAutomatedTagging.Operation,
+			render: function() {
+				var $el = OCA.WorkflowEngine.OperationView.prototype.render.apply(this);
+
+				$el.find('input.operation-operation')
+					.css('width', '400px')
+					.select2({
+					allowClear: true,
+					multiple: true,
+					placeholder: t('files_automatedtagging', 'Tags to assign…'),
+					query: _.debounce(function(query) {
+						query.callback({
+							results: OC.SystemTags.collection.filterByName(query.term)
+						});
+					}, 100, true),
+					initSelection: function(element, callback) {
+						var val = $(element).val().trim();
+						if (val) {
+							var tagIds = val.split(',').sort(),
+								tags = [];
+
+							_.each(tagIds, function (tagId) {
+								var tag = OC.SystemTags.collection.get(tagId);
+								if (!_.isUndefined(tag)) {
+									tags.push(tag.toJSON());
+								}
+							});
+
+							callback(tags);
+
+						}
+					},
+					formatResult: function (tag) {
+						return OC.SystemTags.getDescriptiveTag(tag);
+					},
+					formatSelection: function (tagId) {
+						var tag = OC.SystemTags.collection.get(tagId);
+						return OC.SystemTags.getDescriptiveTag(tag)[0].outerHTML;
+					},
+					escapeMarkup: function(m) {
+						return m;
+					}
+				});
+			}
+		});
+
+	/**
 	 * @class OCA.FilesAutomatedTagging.OperationsView
 	 *
 	 * this creates the view for configured operations
@@ -52,15 +105,30 @@
 	OCA.FilesAutomatedTagging.OperationsView =
 		OCA.WorkflowEngine.OperationsView.extend({
 			initialize: function() {
-				this._initialize('OCA\\FilesAutomatedTagging\\Operation');
+				OCA.WorkflowEngine.OperationsView.prototype.initialize.apply(this, [
+					'OCA\\FilesAutomatedTagging\\Operation'
+				]);
+			},
+			renderOperation: function(operation) {
+				var subView = new OCA.FilesAutomatedTagging.OperationView({
+						model: operation
+					});
+
+				OCA.WorkflowEngine.OperationsView.prototype.renderOperation.apply(this, [
+					subView
+				]);
 			}
 		});
 })();
 
 
 $(document).ready(function() {
-	new OCA.FilesAutomatedTagging.OperationsView({
-		el: '#files_automatedtagging .rules',
-		collection: new OCA.FilesAutomatedTagging.OperationsCollection()
+	OC.SystemTags.collection.fetch({
+		success: function() {
+			new OCA.FilesAutomatedTagging.OperationsView({
+				el: '#files_automatedtagging .rules',
+				collection: new OCA.FilesAutomatedTagging.OperationsCollection()
+			});
+		}
 	});
 });
