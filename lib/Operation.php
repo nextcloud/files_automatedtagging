@@ -53,7 +53,7 @@ class Operation {
 		$matches = $this->checkManager->getMatchingOperations('OCA\FilesAutomatedTagging\Operation', false);
 
 		foreach ($matches as $match) {
-			$this->objectMapper->assignTags($fileId, 'files', json_decode($match['operation'], true));
+			$this->objectMapper->assignTags($fileId, 'files', explode(',', $match['operation']));
 		}
 	}
 }
