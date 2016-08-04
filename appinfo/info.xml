@@ -5,7 +5,7 @@
 	<description>An app for Nextcloud that automatically assigns tags to newly uploaded files based on some conditions</description>
 	<licence>AGPL</licence>
 	<author>Joas Schilling</author>
-	<version>0.5.0</version>
+	<version>0.4.0</version>
 	<namespace>FilesAutomatedTagging</namespace>
 
 	<category>other</category>
@@ -18,6 +18,6 @@
 	</types>
 
 	<dependencies>
-		<owncloud min-version="9.2" max-version="9.2" />
+		<owncloud min-version="9.1" max-version="9.1" />
 	</dependencies>
 </info>
