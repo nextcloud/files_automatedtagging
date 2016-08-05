@@ -58,7 +58,8 @@ class AdminController extends Controller {
 		\OCP\Util::addScript($this->appName, 'admin');
 		return new TemplateResponse('workflowengine', 'admin', [
 			'appid' => $this->appName,
-			'heading' => $this->l10n->t('Files Automated Tagging'),
+			'heading' => $this->l10n->t('Files automated tagging'),
+			'description' => $this->l10n->t('Each rule group consists of one or more rules. A request matches a group if all rules evaluate to true. On uploading a file all defined groups are evaluated and when matching, the given collaborative tags are assigned to the file.'),
 		], 'blank');
 	}
 }
