@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <info>
 	<id>files_automatedtagging</id>
-	<name>Files Automated Tagging</name>
+	<name>Files automated tagging</name>
 	<description>An app for Nextcloud that automatically assigns tags to newly uploaded files based on some conditions</description>
 	<licence>AGPL</licence>
 	<author>Joas Schilling</author>
-	<version>0.5.0</version>
+	<version>1.1.0</version>
 	<namespace>FilesAutomatedTagging</namespace>
 
 	<category>other</category>
