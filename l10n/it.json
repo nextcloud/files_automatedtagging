@@ -1,0 +1,6 @@
+{ "translations": {
+    "Tags to assign…" : "Etichette da assegnare...",
+    "Files automated tagging" : "Etichettatura automatica dei file",
+    "Each rule group consists of one or more rules. A request matches a group if all rules evaluate to true. On uploading a file all defined groups are evaluated and when matching, the given collaborative tags are assigned to the file." : "Ogni gruppo di regole consiste di una o più regole. Una richiesta  corrisponde a un gruppo se tutte le regole valutate sono vere. Al caricamento di un file, sono valutati tutti i gruppi definiti e, in caso di corrispondenza, le specifiche etichette collaborative sono assegnate al file."
+},"pluralForm" :"nplurals=2; plural=(n != 1);"
+}
