@@ -29,8 +29,12 @@ class OperationTest extends TestCase {
 
 	/** @var \OCP\SystemTag\ISystemTagObjectMapper|\PHPUnit_Framework_MockObject_MockObject */
 	protected $objectMapper;
+	/** @var \OCP\SystemTag\ISystemTagManager|\PHPUnit_Framework_MockObject_MockObject */
+	protected $tagManager;
 	/** @var \OCP\WorkflowEngine\IManager|\PHPUnit_Framework_MockObject_MockObject */
 	protected $checkManager;
+	/** @var \OCP\IL10N|\PHPUnit_Framework_MockObject_MockObject */
+	protected $l;
 	/** @var \OCA\FilesAutomatedTagging\Operation */
 	protected $operation;
 
@@ -39,10 +43,14 @@ class OperationTest extends TestCase {
 
 		$this->objectMapper = $this->getMockBuilder('OCP\SystemTag\ISystemTagObjectMapper')
 			->getMock();
+		$this->tagManager = $this->getMockBuilder('OCP\SystemTag\ISystemTagManager')
+			->getMock();
 		$this->checkManager = $this->getMockBuilder('OCP\WorkflowEngine\IManager')
 			->getMock();
+		$this->l = $this->getMockBuilder('OCP\IL10N')
+			->getMock();
 		$this->operation = new Operation(
-			$this->objectMapper, $this->checkManager
+			$this->objectMapper, $this->tagManager, $this->checkManager, $this->l
 		);
 	}
 

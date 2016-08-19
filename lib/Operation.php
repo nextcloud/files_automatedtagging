@@ -23,24 +23,38 @@ namespace OCA\FilesAutomatedTagging;
 
 
 use OCP\Files\Storage\IStorage;
+use OCP\IL10N;
+use OCP\SystemTag\ISystemTagManager;
 use OCP\SystemTag\ISystemTagObjectMapper;
+use OCP\SystemTag\TagNotFoundException;
 use OCP\WorkflowEngine\IManager;
+use OCP\WorkflowEngine\IOperation;
 
-class Operation {
+class Operation implements IOperation {
 
 	/** @var ISystemTagObjectMapper */
 	protected $objectMapper;
 
+	/** @var ISystemTagManager */
+	protected $tagManager;
+
 	/** @var IManager */
 	protected $checkManager;
 
+	/** @var IL10N */
+	protected $l;
+
 	/**
 	 * @param ISystemTagObjectMapper $objectMapper
+	 * @param ISystemTagManager $tagManager
 	 * @param IManager $checkManager
+	 * @param IL10N $l
 	 */
-	public function __construct(ISystemTagObjectMapper $objectMapper, IManager $checkManager) {
+	public function __construct(ISystemTagObjectMapper $objectMapper, ISystemTagManager $tagManager, IManager $checkManager, IL10N $l) {
 		$this->objectMapper = $objectMapper;
+		$this->tagManager = $tagManager;
 		$this->checkManager = $checkManager;
+		$this->l = $l;
 	}
 
 	/**
@@ -54,6 +68,21 @@ class Operation {
 
 		foreach ($matches as $match) {
 			$this->objectMapper->assignTags($fileId, 'files', explode(',', $match['operation']));
+		}
+	}
+
+	/**
+	 * @param string $name
+	 * @param array[] $checks
+	 * @param string $operation
+	 * @throws \UnexpectedValueException
+	 */
+	public function validateOperation($name, array $checks, $operation) {
+		$systemTagIds = explode(',', $operation);
+		try {
+			$this->tagManager->getTagsByIds($systemTagIds);
+		} catch (TagNotFoundException $e) {
+			throw new \UnexpectedValueException($this->l->t('Tag(s) could not be found: %s', implode(', ', $e->getMissingTags())));
 		}
 	}
 }
