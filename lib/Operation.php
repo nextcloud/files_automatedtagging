@@ -78,11 +78,17 @@ class Operation implements IOperation {
 	 * @throws \UnexpectedValueException
 	 */
 	public function validateOperation($name, array $checks, $operation) {
+		if ($operation === '') {
+			throw new \UnexpectedValueException($this->l->t('No tags given'));
+		}
+
 		$systemTagIds = explode(',', $operation);
 		try {
 			$this->tagManager->getTagsByIds($systemTagIds);
 		} catch (TagNotFoundException $e) {
 			throw new \UnexpectedValueException($this->l->t('Tag(s) could not be found: %s', implode(', ', $e->getMissingTags())));
+		} catch (\InvalidArgumentException $e) {
+			throw new \UnexpectedValueException($this->l->t('At least one of the given tags is invalid'));
 		}
 	}
 }
