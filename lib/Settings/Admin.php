@@ -23,7 +23,7 @@
 
 namespace OCA\FilesAutomatedTagging\Settings;
 
-use OCA\FilesAccessControl\AppInfo\Application;
+use OCA\FilesAutomatedTagging\AppInfo\Application;
 use OCP\AppFramework\Http\TemplateResponse;
 use OCP\IL10N;
 use OCP\Settings\ISettings;
@@ -35,15 +35,20 @@ class Admin implements ISettings {
 	/** @var IL10N */
 	private $l10n;
 
-	/** @var Application */
-	private $app;
+	/** @var string */
+	private $appName;
 
 	/** @var EventDispatcherInterface */
 	private $eventDispatcher;
 
-	public function __construct(IL10N $l10n, Application $app, EventDispatcherInterface $eventDispatcher) {
-		$this->l10n = $l10n;
-		$this->app = $app;
+	/**
+	 * @param string $appName
+	 * @param IL10N $l
+	 * @param EventDispatcherInterface $eventDispatcher
+	 */
+	public function __construct($appName, IL10N $l, EventDispatcherInterface $eventDispatcher) {
+		$this->appName = $appName;
+		$this->l10n = $l;
 		$this->eventDispatcher = $eventDispatcher;
 	}
 
@@ -51,11 +56,10 @@ class Admin implements ISettings {
 	 * @return TemplateResponse
 	 */
 	public function getForm() {
-		$appName = $this->app->getContainer()->getAppName();
 		$this->eventDispatcher->dispatch('OCP\WorkflowEngine::loadAdditionalSettingScripts');
-		Util::addScript($appName, 'admin');
+		Util::addScript($this->appName, 'admin');
 		$parameters = [
-			'appid' => $appName,
+			'appid' => $this->appName,
 			'heading' => $this->l10n->t('Files automated tagging'),
 			'description' => $this->l10n->t('Each rule group consists of one or more rules. A request matches a group if all rules evaluate to true. On uploading a file all defined groups are evaluated and when matching, the given collaborative tags are assigned to the file.'),
 		];
