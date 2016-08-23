@@ -1,6 +1,8 @@
 <?php
 /**
- * @copyright Copyright (c) 2016 Joas Schilling <coding@schilljs.com>
+ * @copyright Copyright (c) 2016 Arthur Schiwon <blizzz@arthur-schiwon.de>
+ *
+ * @author Arthur Schiwon <blizzz@arthur-schiwon.de>
  *
  * @license GNU AGPL version 3 or any later version
  *
@@ -19,47 +21,68 @@
  *
  */
 
-namespace OCA\FilesAutomatedTagging\Controller;
+namespace OCA\FilesAutomatedTagging\Settings;
 
-use OCP\AppFramework\Controller;
+use OCA\FilesAutomatedTagging\AppInfo\Application;
 use OCP\AppFramework\Http\TemplateResponse;
 use OCP\IL10N;
-use OCP\IRequest;
+use OCP\Settings\ISettings;
+use OCP\Util;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-class AdminController extends Controller {
+class Admin implements ISettings {
+
+	/** @var IL10N */
+	private $l10n;
+
+	/** @var string */
+	private $appName;
 
 	/** @var EventDispatcherInterface */
-	protected $eventDispatcher;
-	/** @var IL10N */
-	protected $l10n;
+	private $eventDispatcher;
 
 	/**
 	 * @param string $appName
-	 * @param IRequest $request
+	 * @param IL10N $l
 	 * @param EventDispatcherInterface $eventDispatcher
-	 * @param IL10N $l10n
 	 */
-	public function __construct($appName,
-								IRequest $request,
-								EventDispatcherInterface $eventDispatcher,
-								IL10N $l10n) {
-		parent::__construct($appName, $request);
-
+	public function __construct($appName, IL10N $l, EventDispatcherInterface $eventDispatcher) {
+		$this->appName = $appName;
+		$this->l10n = $l;
 		$this->eventDispatcher = $eventDispatcher;
-		$this->l10n = $l10n;
 	}
 
 	/**
 	 * @return TemplateResponse
 	 */
-	public function index() {
+	public function getForm() {
 		$this->eventDispatcher->dispatch('OCP\WorkflowEngine::loadAdditionalSettingScripts');
-		\OCP\Util::addScript($this->appName, 'admin');
-		return new TemplateResponse('workflowengine', 'admin', [
+		Util::addScript($this->appName, 'admin');
+		$parameters = [
 			'appid' => $this->appName,
 			'heading' => $this->l10n->t('Files automated tagging'),
 			'description' => $this->l10n->t('Each rule group consists of one or more rules. A request matches a group if all rules evaluate to true. On uploading a file all defined groups are evaluated and when matching, the given collaborative tags are assigned to the file.'),
-		], 'blank');
+		];
+
+		return new TemplateResponse('workflowengine', 'admin', $parameters, 'blank');
 	}
+
+	/**
+	 * @return string the section ID, e.g. 'sharing'
+	 */
+	public function getSection() {
+		return 'workflow';
+	}
+
+	/**
+	 * @return int whether the form should be rather on the top or bottom of
+	 * the admin section. The forms are arranged in ascending order of the
+	 * priority values. It is required to return a value between 0 and 100.
+	 *
+	 * E.g.: 70
+	 */
+	public function getPriority() {
+		return 75;
+	}
+
 }
