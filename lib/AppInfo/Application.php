@@ -54,7 +54,7 @@ class Application extends \OCP\AppFramework\App {
 	 * @return StorageWrapper|IStorage
 	 */
 	public function addStorageWrapperCallback($mountPoint, IStorage $storage) {
-		if (!\OC::$CLI && !$storage->instanceOfStorage('OC\Files\Storage\Shared')) {
+		if (!\OC::$CLI && !$storage->instanceOfStorage('OCA\Files_Sharing\SharedStorage')) {
 			$operation = $this->getContainer()->query('OCA\FilesAutomatedTagging\Operation');
 
 			return new StorageWrapper([
