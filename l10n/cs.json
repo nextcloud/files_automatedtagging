@@ -1,0 +1,9 @@
+{ "translations": {
+    "Tags to assign…" : "Značky, které mají být přiřazeny.",
+    "No tags given" : "Tag nezadán",
+    "Tag(s) could not be found: %s" : "Nelze nalézt tag(y): %s",
+    "At least one of the given tags is invalid" : "Alespoň jeden ze zadaných tagů není platný",
+    "Files automated tagging" : "Automatické značkování souborů",
+    "Each rule group consists of one or more rules. A request matches a group if all rules evaluate to true. On uploading a file all defined groups are evaluated and when matching, the given collaborative tags are assigned to the file." : "Každá skupina pravidel obsahuje jedno nebo více pravidel. Požadavek odpovídá skupině, pokud jsou všechna pravidla vyhodnocena jako pravdivá. Při nahrávání souboru jsou vyhodnoceny všechny skupiny a pokud odpovídají, jsou souboru přiřazeny vyhrazené tagy spolupráce."
+},"pluralForm" :"nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;"
+}

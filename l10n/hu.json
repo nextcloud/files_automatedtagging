@@ -1,0 +1,9 @@
+{ "translations": {
+    "Tags to assign…" : "Hozzárendelhető címkék...",
+    "No tags given" : "Nincs címke megadva",
+    "Tag(s) could not be found: %s" : "Nem található a címkefelhő: %s",
+    "At least one of the given tags is invalid" : "A megadottak közül legalább egy címke érvénytelen",
+    "Files automated tagging" : "Fájlok automatikus címkézése",
+    "Each rule group consists of one or more rules. A request matches a group if all rules evaluate to true. On uploading a file all defined groups are evaluated and when matching, the given collaborative tags are assigned to the file." : "Minden szabály csoport egy vagy több szabályból áll. Egy kérés akkor egyezik a csoporttal ha minden szabály kiértékelése igaz. Feltöltéskor minden csoport kiértékelésre kerül és ha egyezik, akkor a megadott címke hozzá lesz rendelve a fájlhoz."
+},"pluralForm" :"nplurals=2; plural=(n != 1);"
+}
