@@ -1,0 +1,5 @@
+{ "translations": {
+    "No tags given" : "Žiadne vybrané štítky",
+    "At least one of the given tags is invalid" : "Najmnenej jeden zadaný štítok je neplatný"
+},"pluralForm" :"nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;"
+}
