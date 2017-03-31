@@ -1,7 +1,7 @@
 OC.L10N.register(
     "files_automatedtagging",
     {
-    "Tags to assign…" : "Etiquetas para assinar...",
+    "Tags to assign…" : "Etiquetas para endereçar...",
     "No tags given" : "Nenhuma tag aplicada",
     "Tag(s) could not be found: %s" : "Tag(s) não encontradas: %s",
     "At least one of the given tags is invalid" : "Pelo menos uma das tags aplicadas é inválida",
