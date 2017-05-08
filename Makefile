@@ -29,6 +29,7 @@ appstore: clean
 	--exclude=/l10n/templates \
 	--exclude=/l10n/.tx \
 	--exclude=/tests \
+	--exclude=/.drone.yml \
 	--exclude=/.git \
 	--exclude=/.github \
 	--exclude=/l10n/l10n.pl \
