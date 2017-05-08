@@ -5,10 +5,12 @@
 	<description>An app for Nextcloud that automatically assigns tags to newly uploaded files based on some conditions</description>
 	<licence>AGPL</licence>
 	<author>Joas Schilling</author>
-	<version>1.2.0</version>
+	<version>1.2.2</version>
 	<namespace>FilesAutomatedTagging</namespace>
 
-	<category>other</category>
+	<category>files</category>
+	<category>organization</category>
+
 	<website>https://github.com/nextcloud/files_automatedtagging</website>
 	<bugs>https://github.com/nextcloud/files_automatedtagging/issues</bugs>
 	<repository type="git">https://github.com/nextcloud/files_automatedtagging.git</repository>
