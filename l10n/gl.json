@@ -5,6 +5,6 @@
     "At least one of the given tags is invalid" : "Alo menos unha etiqueta das dadas é incorrecta",
     "Files automated tagging" : "Etiquetado automatizado de etiquetas",
     "Automatically tag files based on factors such as filetype, user group memberships, time and more." : "Etiqueta automaticamente os ficheiros baseándose en factores como o tipo de ficheiro, a pertenza a grupos de usuarios, o tempo e máis.",
-    "Each rule group consists of one or more rules. A request matches a group if all rules evaluate to true. On uploading a file all defined groups are evaluated and when matching, the given collaborative tags are assigned to the file." : "Cada grupo de regras consiste nunha ou máis regras. Unha petición coincide cun grupo se todas as regras se avalían como verdadeiras. Ao enviar un ficheiro avalíanse todos os grupos definidos e se coinciden, esas etiquetas colaborativas asígnanse aos ficheiro,"
+    "Each rule group consists of one or more rules. A request matches a group if all rules evaluate to true. On uploading a file all defined groups are evaluated and when matching, the given collaborative tags are assigned to the file." : "Cada grupo de regras consiste nunha ou máis regras. Unha solicitude coincide cun grupo se todas as regras se avalían como verdadeiras. Ao enviar un ficheiro avalíanse todos os grupos definidos e se coinciden, esas etiquetas colaborativas asígnanse aos ficheiro,"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
 }
