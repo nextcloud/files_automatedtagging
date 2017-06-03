@@ -1,7 +1,7 @@
 { "translations": {
     "Tags to assign…" : "Zuzuweisende Tags…",
     "No tags given" : "Keine Tags ausgewählt",
-    "Tag(s) could not be found: %s" : "Tag(s) konnten nicht gefunden werden: %s",
+    "Tag(s) could not be found: %s" : "Tag(s) nicht gefunden: %s",
     "At least one of the given tags is invalid" : "Mindestens einer der vergebenen Tags ist ungültig",
     "Files automated tagging" : "Tags für Dateien automatisch zuweisen",
     "Automatically tag files based on factors such as filetype, user group memberships, time and more." : "Weise Dateien automatisch Tags zu. Dies kann auf Basis des Dateityps, Mitgliedschaft von Gruppen, Zeit oder weiterem passieren.",
