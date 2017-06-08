@@ -1,7 +1,7 @@
 OC.L10N.register(
     "files_automatedtagging",
     {
-    "Tags to assign…" : "Etiquetas para endereçar...",
+    "Tags to assign…" : "Etiquetas para direcionar...",
     "No tags given" : "Nenhuma etiqueta fornecida",
     "Tag(s) could not be found: %s" : "Etiqueta(s) não encontradas: %s",
     "At least one of the given tags is invalid" : "Pelo menos uma das etiquetas fornecidas é inválida",
