@@ -9,4 +9,4 @@ OC.L10N.register(
     "Automatically tag files based on factors such as filetype, user group memberships, time and more." : "Automatycznie oznacz pliki na podstawie czynników takich, jak typ pliku, członkostwo uzytkownika w grupie, czas, itp.",
     "Each rule group consists of one or more rules. A request matches a group if all rules evaluate to true. On uploading a file all defined groups are evaluated and when matching, the given collaborative tags are assigned to the file." : "Każda reguła grupy składa się z jednego lub z większej ilości reguł. Żądanie pasuje do grupy, jeżeli wszystkie zasady są oceniane pozytywnie. Jeśli na przesyłany plik, wszystkie zdefiniowane grupy ocenią podczas dopasowywania, to podane etykiety współpracy są przypisane do pliku."
 },
-"nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n%100<12 || n%100>=14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);");
+"nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);");
