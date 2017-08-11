@@ -32,6 +32,10 @@ To define tags, administrators can create and manage a set of rule groups. Each 
 		<nextcloud min-version="13" max-version="13" />
 	</dependencies>
 
+	<documentation>
+		<admin>https://docs.nextcloud.com/server/13/go.php?to=admin-files-automated-tagging</admin>
+	</documentation>
+
 	<settings>
 		<admin>OCA\FilesAutomatedTagging\Settings\Admin</admin>
 	</settings>
