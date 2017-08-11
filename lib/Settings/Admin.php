@@ -60,6 +60,7 @@ class Admin implements ISettings {
 		Util::addScript($this->appName, 'admin');
 		$parameters = [
 			'appid' => $this->appName,
+			'docs' => 'admin-files-automated-tagging',
 			'heading' => $this->l10n->t('Files automated tagging'),
 			'settings-hint' => $this->l10n->t('Automatically tag files based on factors such as filetype, user group memberships, time and more.'),
 			'description' => $this->l10n->t('Each rule group consists of one or more rules. A request matches a group if all rules evaluate to true. On uploading a file all defined groups are evaluated and when matching, the given collaborative tags are assigned to the file.'),
