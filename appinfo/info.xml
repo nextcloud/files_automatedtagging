@@ -23,6 +23,10 @@
 		<nextcloud min-version="12" max-version="12" />
 	</dependencies>
 
+	<documentation>
+		<admin>https://docs.nextcloud.com/server/12/go.php?to=admin-files-automated-tagging</admin>
+	</documentation>
+
 	<settings>
 		<admin>OCA\FilesAutomatedTagging\Settings\Admin</admin>
 	</settings>
