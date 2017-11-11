@@ -2,7 +2,7 @@ OC.L10N.register(
     "files_automatedtagging",
     {
     "Tags to assign…" : "Merkelapper som kan angis…",
-    "No tags given" : "Ingen merkelapper er angitt",
+    "No tags given" : "Ingen merkelapper angitt",
     "Tag(s) could not be found: %s" : "Merkelapp(er) ble ikke funnet: %s",
     "At least one of the given tags is invalid" : "Minst én av merkelappene er ugyldige",
     "Files automated tagging" : "Filenes automatiske merkelapper",
