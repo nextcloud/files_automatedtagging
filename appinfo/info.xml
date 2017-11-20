@@ -2,6 +2,7 @@
 <info>
 	<id>files_automatedtagging</id>
 	<name>Files automated tagging</name>
+	<summary>Automatically assign collaborative tags to files based on conditions</summary>
 	<description>An app for Nextcloud that automatically assigns tags to newly uploaded files based on some conditions.
 
 The tags can later be used to control retention, file access, automatic script execution and more.
