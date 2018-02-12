@@ -27,7 +27,7 @@ appstore: clean
 	--exclude=/build \
 	--exclude=/docs \
 	--exclude=/l10n/templates \
-	--exclude=/l10n/.tx \
+	--exclude=/.tx \
 	--exclude=/tests \
 	--exclude=/.drone.yml \
 	--exclude=/.git \
