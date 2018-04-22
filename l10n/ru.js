@@ -1,7 +1,7 @@
 OC.L10N.register(
     "files_automatedtagging",
     {
-    "Tags to assign…" : "Метки для присвоения...",
+    "Tags to assign…" : "Метки для присвоения…",
     "No tags given" : "Метки не заданы",
     "Tag(s) could not be found: %s" : "Метка(и) не найдена: %s",
     "At least one of the given tags is invalid" : "По крайней мере одна метка является неправильной",
