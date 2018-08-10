@@ -20,4 +20,3 @@
  */
 
 $application = new \OCA\FilesAutomatedTagging\AppInfo\Application();
-$application->registerHooksAndListeners();
