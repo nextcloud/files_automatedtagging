@@ -15,7 +15,7 @@ To define tags, administrators can create and manage a set of rule groups. Each 
 	<screenshot>https://raw.githubusercontent.com/nextcloud/files_automatedtagging/master/docs/screenshot.png</screenshot>
 	<licence>AGPL</licence>
 	<author>Joas Schilling</author>
-	<version>1.4.0</version>
+	<version>1.5.0</version>
 	<namespace>FilesAutomatedTagging</namespace>
 
 	<category>files</category>
@@ -30,11 +30,11 @@ To define tags, administrators can create and manage a set of rule groups. Each 
 	</types>
 
 	<dependencies>
-		<nextcloud min-version="14" max-version="14" />
+		<nextcloud min-version="15" max-version="15" />
 	</dependencies>
 
 	<documentation>
-		<admin>https://docs.nextcloud.com/server/14/go.php?to=admin-files-automated-tagging</admin>
+		<admin>https://docs.nextcloud.com/server/15/go.php?to=admin-files-automated-tagging</admin>
 	</documentation>
 
 	<settings>
