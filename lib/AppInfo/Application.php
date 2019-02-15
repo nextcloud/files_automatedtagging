@@ -21,10 +21,10 @@
 
 namespace OCA\FilesAutomatedTagging\AppInfo;
 
-use OC\Files\Filesystem;
-use OCA\FilesAutomatedTagging\StorageWrapper;
+use OCP\Files\Cache\CacheInsertEvent;
+use OCA\FilesAutomatedTagging\Operation;
+use OCP\Files\IHomeStorage;
 use OCP\Files\Storage\IStorage;
-use OCP\Util;
 
 class Application extends \OCP\AppFramework\App {
 
@@ -36,34 +36,14 @@ class Application extends \OCP\AppFramework\App {
 	 * Register all hooks and listeners
 	 */
 	public function registerHooksAndListeners() {
-		Util::connectHook('OC_Filesystem', 'preSetup', $this, 'addStorageWrapper');
-	}
+		$eventDispatcher = $this->getContainer()->getServer()->getEventDispatcher();
 
-	/**
-	 * @internal
-	 */
-	public function addStorageWrapper() {
-		// Needs to be added as the first layer
-		Filesystem::addStorageWrapper('files_automatedtagging', [$this, 'addStorageWrapperCallback'], -1);
-	}
-
-	/**
-	 * @internal
-	 * @param $mountPoint
-	 * @param IStorage $storage
-	 * @return StorageWrapper|IStorage
-	 */
-	public function addStorageWrapperCallback($mountPoint, IStorage $storage) {
-		if (!\OC::$CLI && !$storage->instanceOfStorage('OCA\Files_Sharing\SharedStorage')) {
-			$operation = $this->getContainer()->query('OCA\FilesAutomatedTagging\Operation');
-
-			return new StorageWrapper([
-				'storage' => $storage,
-				'operation' => $operation,
-				'mountPoint' => $mountPoint,
-			]);
-		}
-
-		return $storage;
+		$eventDispatcher->addListener(CacheInsertEvent::class, function (CacheInsertEvent $event) {
+			/** @var Operation $operation */
+			$operation = $this->getContainer()->query(Operation::class);
+			if ($operation->isTaggingPath($event->getStorage(), $event->getPath())) {
+				$operation->checkOperations($event->getStorage(), $event->getFileId(), $event->getPath());
+			}
+		});
 	}
 }

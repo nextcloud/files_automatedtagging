@@ -21,8 +21,11 @@
 
 namespace OCA\FilesAutomatedTagging\Tests;
 
+use OC\Files\Storage\Home;
+use OC\Files\Storage\Local;
 use OCA\FilesAutomatedTagging\Operation;
 use OCP\Files\Storage\IStorage;
+use OCP\IConfig;
 use Test\TestCase;
 
 class OperationTest extends TestCase {
@@ -35,6 +38,8 @@ class OperationTest extends TestCase {
 	protected $checkManager;
 	/** @var \OCP\IL10N|\PHPUnit_Framework_MockObject_MockObject */
 	protected $l;
+	/** @var \OCP\IConfig\\PHPUnit_Framework_MockObject_MockObject */
+	protected $config;
 	/** @var \OCA\FilesAutomatedTagging\Operation */
 	protected $operation;
 
@@ -49,8 +54,11 @@ class OperationTest extends TestCase {
 			->getMock();
 		$this->l = $this->getMockBuilder('OCP\IL10N')
 			->getMock();
+		$this->config = $this->createMock(IConfig::class);
+		$this->config->method('getSystemValue')
+			->willReturn('instanceid');
 		$this->operation = new Operation(
-			$this->objectMapper, $this->tagManager, $this->checkManager, $this->l
+			$this->objectMapper, $this->tagManager, $this->checkManager, $this->l, $this->config
 		);
 	}
 
@@ -68,7 +76,7 @@ class OperationTest extends TestCase {
 			[$this->getStorageMock(), 23, 'path2', [
 				['operation' => '2,3'],
 				['operation' => '42']
-			],[
+			], [
 				[2, 3],
 				[42],
 			]],
@@ -102,5 +110,29 @@ class OperationTest extends TestCase {
 		}
 
 		$this->operation->checkOperations($storage, $fileId, $file);
+	}
+
+	public function taggingPathDataProvider() {
+		return [
+			[Home::class, 'trash/foo', false],
+			[Home::class, 'files/foo', true],
+			[Home::class, 'files', false],
+			[Local::class, 'foo', true],
+			[Local::class, 'appdata_instanceid/foo', false],
+		];
+	}
+
+	/**
+	 * @dataProvider taggingPathDataProvider
+	 * @param string $storageClass
+	 * @param string $path
+	 * @param bool $expected
+	 */
+	public function testIsTaggingPath(string $storageClass, string $path, bool $expected) {
+		$storage = $this->getMockBuilder($storageClass)
+			->disableOriginalConstructor()
+			->setMethodsExcept(['instanceOfStorage'])
+			->getMock();
+		$this->assertEquals($expected, $this->operation->isTaggingPath($storage, $path));
 	}
 }

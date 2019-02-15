@@ -22,7 +22,9 @@
 namespace OCA\FilesAutomatedTagging;
 
 
+use OCP\Files\IHomeStorage;
 use OCP\Files\Storage\IStorage;
+use OCP\IConfig;
 use OCP\IL10N;
 use OCP\SystemTag\ISystemTagManager;
 use OCP\SystemTag\ISystemTagObjectMapper;
@@ -44,17 +46,21 @@ class Operation implements IOperation {
 	/** @var IL10N */
 	protected $l;
 
+	private $config;
+
 	/**
 	 * @param ISystemTagObjectMapper $objectMapper
 	 * @param ISystemTagManager $tagManager
 	 * @param IManager $checkManager
 	 * @param IL10N $l
+	 * @param IConfig $config
 	 */
-	public function __construct(ISystemTagObjectMapper $objectMapper, ISystemTagManager $tagManager, IManager $checkManager, IL10N $l) {
+	public function __construct(ISystemTagObjectMapper $objectMapper, ISystemTagManager $tagManager, IManager $checkManager, IL10N $l, IConfig $config) {
 		$this->objectMapper = $objectMapper;
 		$this->tagManager = $tagManager;
 		$this->checkManager = $checkManager;
 		$this->l = $l;
+		$this->config = $config;
 	}
 
 	/**
@@ -90,5 +96,30 @@ class Operation implements IOperation {
 		} catch (\InvalidArgumentException $e) {
 			throw new \UnexpectedValueException($this->l->t('At least one of the given tags is invalid'));
 		}
+	}
+
+	public function isTaggingPath(IStorage $storage, string $file): bool {
+		if ($storage->instanceOfStorage(IHomeStorage::class)) {
+			if (substr_count($file, '/') === 0) {
+				return false;
+			}
+			list($folder) = explode('/', $file, 2);
+			return $folder === 'files';
+		} else {
+			list($folder) = explode('/', $file, 2);
+			// the root folder only contains appdata and home mounts
+			// anything in a non homestorage and not in the appdata folder
+			// should be a mounted folder
+			return $folder !== $this->getAppDataFolderName();
+		}
+	}
+
+	private function getAppDataFolderName() {
+		$instanceId = $this->config->getSystemValue('instanceid', null);
+		if ($instanceId === null) {
+			throw new \RuntimeException('no instance id!');
+		}
+
+		return 'appdata_' . $instanceId;
 	}
 }
