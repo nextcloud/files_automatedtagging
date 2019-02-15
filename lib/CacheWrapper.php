@@ -22,6 +22,7 @@
 namespace OCA\FilesAutomatedTagging;
 
 
+use OCP\Files\Cache\CacheInsertEvent;
 use OCP\Files\Cache\ICache;
 use OCP\Files\Storage\IStorage;
 

@@ -22,7 +22,9 @@
 namespace OCA\FilesAutomatedTagging\AppInfo;
 
 use OC\Files\Filesystem;
+use OCA\FilesAutomatedTagging\CacheInsertEventHandler;
 use OCA\FilesAutomatedTagging\StorageWrapper;
+use OCP\Files\Cache\CacheInsertEvent;
 use OCP\Files\Storage\IStorage;
 use OCP\Util;
 
@@ -37,6 +39,13 @@ class Application extends \OCP\AppFramework\App {
 	 */
 	public function registerHooksAndListeners() {
 		Util::connectHook('OC_Filesystem', 'preSetup', $this, 'addStorageWrapper');
+
+		$dispatcher = $this->getContainer()->getServer()->getEventDispatcher();
+		$dispatcher->addListener(CacheInsertEvent::class, function(CacheInsertEvent $event) {
+			/** @var CacheInsertEventHandler $handler */
+			$handler = $this->getContainer()->query(CacheInsertEventHandler::class);
+			$handler->handle($event);
+		});
 	}
 
 	/**
