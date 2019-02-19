@@ -21,10 +21,7 @@
 
 namespace OCA\FilesAutomatedTagging\AppInfo;
 
-use OCP\Files\Cache\CacheInsertEvent;
-use OCA\FilesAutomatedTagging\Operation;
-use OCP\Files\IHomeStorage;
-use OCP\Files\Storage\IStorage;
+use OCA\FilesAutomatedTagging\CacheListener;
 
 class Application extends \OCP\AppFramework\App {
 
@@ -36,14 +33,8 @@ class Application extends \OCP\AppFramework\App {
 	 * Register all hooks and listeners
 	 */
 	public function registerHooksAndListeners() {
-		$eventDispatcher = $this->getContainer()->getServer()->getEventDispatcher();
-
-		$eventDispatcher->addListener(CacheInsertEvent::class, function (CacheInsertEvent $event) {
-			/** @var Operation $operation */
-			$operation = $this->getContainer()->query(Operation::class);
-			if ($operation->isTaggingPath($event->getStorage(), $event->getPath())) {
-				$operation->checkOperations($event->getStorage(), $event->getFileId(), $event->getPath());
-			}
-		});
+		/** @var CacheListener $cacheListener */
+		$cacheListener = $this->getContainer()->query(CacheListener::class);
+		$cacheListener->listen();
 	}
 }
