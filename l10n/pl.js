@@ -3,7 +3,7 @@ OC.L10N.register(
     {
     "Tags to assign…" : "Przypisz etykietę…",
     "No tags given" : "Nie podano etykiet",
-    "Tag(s) could not be found: %s" : "Etykieta(y) nie została(y) znaleziona(e): %s",
+    "Tag(s) could not be found: %s" : "Nie można znaleźć etykiet(y): %s",
     "At least one of the given tags is invalid" : "Co najmniej jedna z podanych etykiet jest niewłaściwa",
     "Automated tagging" : "Automatyczne przypisywanie etykiet",
     "Automatically tag files based on factors such as filetype, user group memberships, time and more." : "Automatycznie oznacz pliki na podstawie czynników takich jak: typ pliku, członkostwo użytkownika w grupie, czas, itp.",
