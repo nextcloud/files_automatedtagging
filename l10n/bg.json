@@ -1,0 +1,5 @@
+{ "translations": {
+    "At least one of the given tags is invalid" : "Поне един от етикетите е невалиден",
+    "Files automated tagging" : "Автоматично поставяне на етикети"
+},"pluralForm" :"nplurals=2; plural=(n != 1);"
+}
