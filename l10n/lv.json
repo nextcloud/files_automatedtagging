@@ -1,5 +1,5 @@
 { "translations": {
-    "Tags to assign…" : "Atzīmes ko piešķirt...",
+    "Tags to assign…" : "Birkas ko piešķirt...",
     "No tags given" : "Nav piešķirtas birkas",
     "Tag(s) could not be found: %s" : "Birka(s) nav atrasta(s): %s",
     "At least one of the given tags is invalid" : "Vismaz vienu no birkām ir nederīga",
