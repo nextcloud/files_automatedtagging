@@ -80,12 +80,7 @@ class Operation implements ISpecificOperation {
 	 * @param string $file
 	 */
 	public function checkOperations(IStorage $storage, $fileId, $file) {
-		$this->checkManager->setFileInfo($storage, $file);
-		$matches = $this->checkManager->getMatchingOperations('OCA\FilesAutomatedTagging\Operation', false);
 
-		foreach ($matches as $match) {
-			$this->objectMapper->assignTags($fileId, 'files', explode(',', $match['operation']));
-		}
 	}
 
 	/**
@@ -200,7 +195,23 @@ class Operation implements ISpecificOperation {
 	 * @since 18.0.0
 	 */
 	public function onEvent(string $eventName, GenericEvent $event, IRuleMatcher $matcher): void {
-		
+		if($eventName === '\OCP\Files::postRename') {
+			/** @var Node $oldNode */
+			list(, $node) = $event->getSubject();
+		} else {
+			$node = $event->getSubject();
+		}
+
+		if (is_array($node)) {
+			$node = $node[0];
+		}
+		/** @var Node $node */
+		$matcher->setFileInfo($node->getStorage(), $node->getInternalPath());
+		$matches = $matcher->getMatchingOperations(self::class, false);
+
+		foreach ($matches as $match) {
+			$this->objectMapper->assignTags($node->getId(), 'files', explode(',', $match['operation']));
+		}
 	}
 
 	/**
