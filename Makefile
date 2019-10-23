@@ -20,8 +20,14 @@ create-tag:
 clean:
 	rm -rf $(build_dir)
 	rm -rf node_modules
+	rm -rf js/*
 
-appstore: clean
+build:
+	mkdir -p js/
+	npm ci
+	npm run build
+
+appstore: clean build
 	mkdir -p $(sign_dir)
 	rsync -a \
 	--exclude=/build \
@@ -29,6 +35,7 @@ appstore: clean
 	--exclude=/translationfiles \
 	--exclude=/.tx \
 	--exclude=/tests \
+	--exclude=/src \
 	--exclude=/.drone.yml \
 	--exclude=/.git \
 	--exclude=/.github \

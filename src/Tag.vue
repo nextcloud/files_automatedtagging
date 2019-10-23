@@ -21,7 +21,7 @@
   -->
 
 <template>
-	<MultiselectTags :value="val1" :multiple="true" @input="emitInput" />
+	<MultiselectTags :value="value" :multiple="false" @input="emitInput" />
 </template>
 
 <script>
@@ -34,11 +34,6 @@ export default {
 		value: {
 			type: String,
 			default: ''
-		}
-	},
-	data() {
-		return {
-			val1: [1, 2]
 		}
 	},
 	methods: {
