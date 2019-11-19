@@ -32,11 +32,12 @@ use OCP\IURLGenerator;
 use OCP\SystemTag\ISystemTagManager;
 use OCP\SystemTag\ISystemTagObjectMapper;
 use OCP\SystemTag\TagNotFoundException;
+use OCP\WorkflowEngine\IComplexOperation;
 use OCP\WorkflowEngine\IManager;
 use OCP\WorkflowEngine\IRuleMatcher;
 use OCP\WorkflowEngine\ISpecificOperation;
 
-class Operation implements ISpecificOperation {
+class Operation implements ISpecificOperation, IComplexOperation {
 
 	/** @var ISystemTagObjectMapper */
 	protected $objectMapper;
@@ -211,5 +212,18 @@ class Operation implements ISpecificOperation {
 	 */
 	public function getEntityId(): string {
 		return File::class;
+	}
+
+	/**
+	 * As IComplexOperation chooses the triggering events itself, a hint has
+	 * to be shown to the user so make clear when this operation is becoming
+	 * active. This method returns such a translated string.
+	 *
+	 * Example: "When a file is accessed" (en)
+	 *
+	 * @since 18.0.0
+	 */
+	public function getTriggerHint(): string {
+		return $this->l->t('File is accessed');
 	}
 }
