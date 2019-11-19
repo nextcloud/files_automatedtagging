@@ -99,18 +99,18 @@ class Operation implements IOperation {
 	}
 
 	public function isTaggingPath(IStorage $storage, string $file): bool {
+		if (substr_count($file, '/') === 0) {
+			return false;
+		}
 		if ($storage->instanceOfStorage(IHomeStorage::class)) {
-			if (substr_count($file, '/') === 0) {
-				return false;
-			}
 			list($folder) = explode('/', $file, 2);
 			return $folder === 'files';
 		} else {
-			list($folder) = explode('/', $file, 2);
+			[$folder, $subPath] = explode('/', $file, 2);
 			// the root folder only contains appdata and home mounts
 			// anything in a non homestorage and not in the appdata folder
 			// should be a mounted folder
-			return $folder !== $this->getAppDataFolderName();
+			return $folder !== $this->getAppDataFolderName() && ($folder !== '__groupfolders' || substr_count($subPath, '/') >= 1);
 		}
 	}
 
