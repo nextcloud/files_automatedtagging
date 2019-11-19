@@ -21,7 +21,7 @@
   -->
 
 <template>
-	<MultiselectTags :value="value" :multiple="false" @input="emitInput" />
+	<MultiselectTags :value="integerValue" :multiple="false" @input="emitInput" />
 </template>
 
 <script>
@@ -36,9 +36,14 @@ export default {
 			default: ''
 		}
 	},
+	computed: {
+		integerValue() {
+			return parseInt(this.value)
+		}
+	},
 	methods: {
 		emitInput(value) {
-			this.$emit('input', value)
+			this.$emit('input', '' + value)
 		}
 	}
 }
