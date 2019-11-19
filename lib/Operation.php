@@ -23,8 +23,8 @@ namespace OCA\FilesAutomatedTagging;
 
 
 use OCA\WorkflowEngine\Entity\File;
+use OCP\EventDispatcher\Event;
 use OCP\Files\IHomeStorage;
-use OCP\Files\Node;
 use OCP\Files\Storage\IStorage;
 use OCP\IConfig;
 use OCP\IL10N;
@@ -33,10 +33,8 @@ use OCP\SystemTag\ISystemTagManager;
 use OCP\SystemTag\ISystemTagObjectMapper;
 use OCP\SystemTag\TagNotFoundException;
 use OCP\WorkflowEngine\IManager;
-use OCP\WorkflowEngine\IOperation;
 use OCP\WorkflowEngine\IRuleMatcher;
 use OCP\WorkflowEngine\ISpecificOperation;
-use Symfony\Component\EventDispatcher\GenericEvent;
 
 class Operation implements ISpecificOperation {
 
@@ -56,7 +54,7 @@ class Operation implements ISpecificOperation {
 	private $config;
 
 	/** @var IURLGenerator */
-	private $urlManager;
+	private $urlGenerator;
 
 	/**
 	 * @param ISystemTagObjectMapper $objectMapper
@@ -195,12 +193,12 @@ class Operation implements ISpecificOperation {
 	 * qualifies for this operation to run has still to be done by the
 	 * implementor.
 	 *
-	 * If the implementor is an IComplexOpe    ration, this method will not be
+	 * If the implementor is an IComplexOperation, this method will not be
 	 * called automatically. It can be used or left as no-op by the implementor.
 	 *
 	 * @since 18.0.0
 	 */
-	public function onEvent(string $eventName, GenericEvent $event, IRuleMatcher $matcher): void {
+	public function onEvent(string $eventName, Event $event, IRuleMatcher $matcher): void {
 		// Assigning tags is handled though the cache listener
 	}
 
