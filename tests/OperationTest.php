@@ -117,7 +117,7 @@ class OperationTest extends TestCase {
 			[Home::class, 'trash/foo', false],
 			[Home::class, 'files/foo', true],
 			[Home::class, 'files', false],
-			[Local::class, 'foo', true],
+			[Local::class, 'foo/bar', true],
 			[Local::class, 'appdata_instanceid/foo', false],
 		];
 	}
