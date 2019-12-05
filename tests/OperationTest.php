@@ -54,7 +54,7 @@ class OperationTest extends TestCase {
 	/** @var IRuleMatcher|MockObject */
 	protected $ruleMatcher;
 
-	protected function setUp() {
+	protected function setUp(): void {
 		parent::setUp();
 
 		$this->ruleMatcher = $this->createMock(IRuleMatcher::class);
