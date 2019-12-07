@@ -1,5 +1,5 @@
 { "translations": {
-    "Tags to assign…" : "Atanacak etiketler...",
+    "Tags to assign…" : "Atanacak etiketler …",
     "No tags given" : "Herhangi bir etiket belirtilmemiş",
     "Tag(s) could not be found: %s" : "Etiketler bulunamadı: %s",
     "At least one of the given tags is invalid" : "Belirtilen etiketlerden en az biri geçersiz",
