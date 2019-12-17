@@ -53,3 +53,7 @@ nbproject
 # Tests - auto-generated files
 /tests/coverage*
 /tests/clover.xml
+
+# node
+node_modules
+/js
