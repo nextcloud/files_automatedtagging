@@ -27,6 +27,7 @@ To define tags, administrators can create and manage a set of rule groups. Each 
 
 	<category>files</category>
 	<category>organization</category>
+	<category>workflow</category>
 
 	<website>https://github.com/nextcloud/files_automatedtagging</website>
 	<bugs>https://github.com/nextcloud/files_automatedtagging/issues</bugs>
