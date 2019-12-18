@@ -115,8 +115,11 @@ class OperationTest extends TestCase {
 			->method('setFileInfo')
 			->with($storage, $file);
 		$this->ruleMatcher->expects($this->once())
-			->method('getMatchingOperations')
-			->with(Operation::class, false)
+			->method('setOperation')
+			->with($this->operation);
+		$this->ruleMatcher->expects($this->once())
+			->method('getFlows')
+			->with(false)
 			->willReturn($matches);
 
 		foreach ($expected as $key => $tags) {

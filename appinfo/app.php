@@ -19,5 +19,5 @@
  *
  */
 
-$application = new \OCA\FilesAutomatedTagging\AppInfo\Application();
+$application = \OC::$server->query(\OCA\FilesAutomatedTagging\AppInfo\Application::class);
 $application->registerHooksAndListeners();
