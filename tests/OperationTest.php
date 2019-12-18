@@ -54,7 +54,7 @@ class OperationTest extends TestCase {
 	/** @var IRuleMatcher|MockObject */
 	protected $ruleMatcher;
 
-	protected function setUp() {
+	protected function setUp(): void {
 		parent::setUp();
 
 		$this->ruleMatcher = $this->createMock(IRuleMatcher::class);
@@ -133,7 +133,7 @@ class OperationTest extends TestCase {
 			[Home::class, 'trash/foo', false],
 			[Home::class, 'files/foo', true],
 			[Home::class, 'files', false],
-			[Local::class, 'foo', true],
+			[Local::class, 'foo', false],
 			[Local::class, 'appdata_instanceid/foo', false],
 		];
 	}
