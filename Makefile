@@ -30,12 +30,21 @@ build:
 appstore: clean build
 	mkdir -p $(sign_dir)
 	rsync -a \
+	--exclude=/.babelrc.js \
 	--exclude=/build \
 	--exclude=/docs \
+	--exclude=/.eslintrc.js \
+	--exclude=/package-lock.json \
+	--exclude=/package.json \
+	--exclude=/node_modules \
 	--exclude=/translationfiles \
 	--exclude=/.tx \
 	--exclude=/tests \
 	--exclude=/src \
+	--exclude=/.stylelintrc.js \
+	--exclude=/webpack.common.js \
+	--exclude=/webpack.dev.js \
+	--exclude=/webpack.prod.js \
 	--exclude=/.drone.yml \
 	--exclude=/.git \
 	--exclude=/.github \
