@@ -23,6 +23,8 @@ namespace OCA\FilesAutomatedTagging\AppInfo;
 
 use OCA\FilesAutomatedTagging\Operation;
 use OCA\FilesAutomatedTagging\CacheListener;
+use OCA\WorkflowEngine\Manager;
+use OCP\EventDispatcher\IEventDispatcher;
 use OCP\Util;
 use OCP\WorkflowEngine\IManager;
 use Symfony\Component\EventDispatcher\GenericEvent;
@@ -41,10 +43,13 @@ class Application extends \OCP\AppFramework\App {
 		$cacheListener = $this->getContainer()->query(CacheListener::class);
 		$cacheListener->listen();
 
-		\OC::$server->getEventDispatcher()->addListener(IManager::EVENT_NAME_REG_OPERATION, function (GenericEvent $event) {
+		\OC::$server->query(IEventDispatcher::class)->addListener(IManager::EVENT_NAME_REG_OPERATION, function (GenericEvent $event) {
 			$operation = \OC::$server->query(Operation::class);
-			$event->getSubject()->registerOperation($operation);
-			Util::addScript('files_automatedtagging', 'files_automatedtagging');
+			$flowManager = $event->getSubject();
+			if($flowManager instanceof Manager) {
+				$flowManager->registerOperation($operation);
+				Util::addScript('files_automatedtagging', 'files_automatedtagging');
+			}
 		});
 	}
 }

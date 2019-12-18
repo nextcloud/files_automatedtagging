@@ -81,7 +81,8 @@ class Operation implements ISpecificOperation, IComplexOperation {
 	public function checkOperations(IStorage $storage, $fileId, $file) {
 		$matcher = $this->checkManager->getRuleMatcher();
 		$matcher->setFileInfo($storage, $file);
-		$matches = $matcher->getMatchingOperations(self::class, false);
+		$matcher->setOperation($this);
+		$matches = $matcher->getFlows(false);
 
 		foreach ($matches as $match) {
 			$this->objectMapper->assignTags($fileId, 'files', explode(',', $match['operation']));
