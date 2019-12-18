@@ -24,7 +24,7 @@
 		"@babel/runtime": "^7.7.2",
 		"@nextcloud/l10n": "^0.2.1",
 		"@nextcloud/vue": "^1.2.2",
-		"vue": "^2.6.10"
+		"vue": "^2.6.11"
 	},
 	"browserslist": [
 		"extends browserslist-config-nextcloud"
@@ -59,7 +59,7 @@
 		"stylelint-scss": "^3.13.0",
 		"stylelint-webpack-plugin": "^0.10.5",
 		"vue-loader": "^15.7.2",
-		"vue-template-compiler": "^2.6.10",
+		"vue-template-compiler": "^2.6.11",
 		"webpack": "^4.41.0",
 		"webpack-cli": "^3.3.10",
 		"webpack-merge": "^4.2.2",
