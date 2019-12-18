@@ -33,19 +33,19 @@ export default {
 	props: {
 		value: {
 			type: String,
-			default: ''
-		}
+			default: '',
+		},
 	},
 	computed: {
 		integerValue() {
 			return parseInt(this.value)
-		}
+		},
 	},
 	methods: {
 		emitInput(value) {
 			this.$emit('input', '' + value)
-		}
-	}
+		},
+	},
 }
 </script>
 

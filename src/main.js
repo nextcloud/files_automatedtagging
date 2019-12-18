@@ -7,5 +7,5 @@ window.OCA.WorkflowEngine.registerOperator({
 	iconClass: 'icon-tag-white',
 	color: 'var(--color-success)',
 	operation: '',
-	options: Tag
+	options: Tag,
 })
