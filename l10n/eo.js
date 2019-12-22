@@ -5,6 +5,7 @@ OC.L10N.register(
     "Tag(s) could not be found: %s" : "Etikedo(j) ne troveblis: %s",
     "At least one of the given tags is invalid" : "Almenaŭ unu el la etikedo ne validas",
     "Automated tagging" : "Aŭtomata etikedado",
+    "File is accessed" : "Dosiero estas atingita",
     "Automatically tag files based on factors such as filetype, user group memberships, time and more." : "Aŭtomate etikedi dosierojn surbaze de dosiertipo, grupaneco, tempo k.s.",
     "Each rule group consists of one or more rules. A request matches a group if all rules evaluate to true. On uploading a file all defined groups are evaluated and when matching, the given collaborative tags are assigned to the file." : "Ĉiu regulgrupo konsistas en unu aŭ pluraj reguloj. Peto kongruas kun grupo, se ĉiuj reguloj liveras veron. Kiam dosiero alŝutiĝas, ĉiuj difinitaj grupoj estas ekzamenitaj kaj, se ili kongruas, la kunlaboraj etikedoj atribuiĝas al la dosiero.",
     "Files automated tagging" : "Aŭtomata etikedado de dosieroj",
