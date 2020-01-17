@@ -57,3 +57,6 @@ nbproject
 # node
 node_modules
 /js
+
+# packaging
+/build/

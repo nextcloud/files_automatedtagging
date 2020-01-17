@@ -9,24 +9,30 @@ package_name=$(app_name)
 cert_dir=$(HOME)/.nextcloud/certificates
 version+=1.2.2
 
+.PHONY: all
 all: appstore
 
+.PHONY: release
 release: appstore create-tag
 
+.PHONY: create-tag
 create-tag:
 	git tag -s -a v$(version) -m "Tagging the $(version) release."
 	git push origin v$(version)
 
+.PHONY: clean
 clean:
 	rm -rf $(build_dir)
 	rm -rf node_modules
 	rm -rf js/*
 
+.PHONY: build
 build:
 	mkdir -p js/
 	npm ci
 	npm run build
 
+.PHONY: appstore
 appstore: clean build
 	mkdir -p $(sign_dir)
 	rsync -a \
