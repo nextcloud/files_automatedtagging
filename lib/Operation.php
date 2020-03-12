@@ -22,6 +22,7 @@
 namespace OCA\FilesAutomatedTagging;
 
 
+use OCA\GroupFolders\Mount\GroupFolderStorage;
 use OCA\WorkflowEngine\Entity\File;
 use OCP\EventDispatcher\Event;
 use OCP\Files\IHomeStorage;
@@ -111,9 +112,15 @@ class Operation implements ISpecificOperation, IComplexOperation {
 	}
 
 	public function isTaggingPath(IStorage $storage, string $file): bool {
+		if ($storage->instanceOfStorage(GroupFolderStorage::class)) {
+			// We do not tag the roots of groupfolders, but every path inside we do
+			return strpos($file, '__groupfolders') !== 0;
+		}
+
 		if (substr_count($file, '/') === 0) {
 			return false;
 		}
+
 		if ($storage->instanceOfStorage(IHomeStorage::class)) {
 			list($folder) = explode('/', $file, 2);
 			return $folder === 'files';
@@ -122,7 +129,7 @@ class Operation implements ISpecificOperation, IComplexOperation {
 			// the root folder only contains appdata and home mounts
 			// anything in a non homestorage and not in the appdata folder
 			// should be a mounted folder
-			return $folder !== $this->getAppDataFolderName() && ($folder !== '__groupfolders' || substr_count($subPath, '/') >= 1);
+			return $folder !== $this->getAppDataFolderName() && substr_count($subPath, '/') >= 1;
 		}
 	}
 
