@@ -3,6 +3,7 @@
     "Tag(s) could not be found: %s" : "No s'han trobat etiquetes: %s",
     "At least one of the given tags is invalid" : "Al menys una de les etiquetes donades no és vàlida",
     "Automated tagging" : "Etiquetatge automàtic",
+    "File is accessed" : "S’ha accedit al fitxer",
     "Automatically tag files based on factors such as filetype, user group memberships, time and more." : "Etiquetaa automàticament els fitxers en funció de factors com ara el tipus de fitxer, la pertinença al grup d’usuaris, l’hora i més.",
     "Each rule group consists of one or more rules. A request matches a group if all rules evaluate to true. On uploading a file all defined groups are evaluated and when matching, the given collaborative tags are assigned to the file." : "Cada grup de regles està format per una o més regles. Una sol·licitud coincideix amb un grup si totes les regles s’avaluen a certes. En carregar un fitxer, es valoren tots els grups definits i, quan coincideixen, les etiquetes col·laboratives donades s'assignen al fitxer.",
     "Files automated tagging" : "Fitxers etiquetats automàticament",
