@@ -232,6 +232,6 @@ class Operation implements ISpecificOperation, IComplexOperation {
 	 * @since 18.0.0
 	 */
 	public function getTriggerHint(): string {
-		return $this->l->t('File is accessed');
+		return $this->l->t('File is changed');
 	}
 }
