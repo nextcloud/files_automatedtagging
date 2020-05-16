@@ -6,7 +6,6 @@ OC.L10N.register(
     "At least one of the given tags is invalid" : "Belirtilen etiketlerden en az biri geçersiz",
     "Automated tagging" : "Otomatik etiketleme",
     "Automated tagging of files" : "Otomatik dosya etiketleme",
-    "File is accessed" : "Dosyaya erişildi",
     "Automatically tag files based on factors such as filetype, user group memberships, time and more." : "Dosyaları dosya türü, kullanıcı grubu üyeliği, zaman gibi ölçütlere göre etiketleyebilirsiniz.",
     "Each rule group consists of one or more rules. A request matches a group if all rules evaluate to true. On uploading a file all defined groups are evaluated and when matching, the given collaborative tags are assigned to the file." : "Her bir kural grubunda bir ya da bir kaç kural bulunur. Bir isteğin bir gruba uygun olması için gruptaki tüm kurallar karşılanmış olmalıdır. Bir dosyanın yüklenebilmesi için tanımlanmış gruplar değerlendirilir ve eşleşme varsa dosyaya ilgili etiketler atanır.",
     "Files automated tagging" : "Otomatik dosya etiketleme",

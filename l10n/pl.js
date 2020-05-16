@@ -6,7 +6,6 @@ OC.L10N.register(
     "At least one of the given tags is invalid" : "Co najmniej jedna z podanych etykiet jest niewłaściwa",
     "Automated tagging" : "Automatyczne przypisywanie etykiet",
     "Automated tagging of files" : "Automatyczne etykietowanie plików",
-    "File is accessed" : "Plik jest dostępny",
     "Automatically tag files based on factors such as filetype, user group memberships, time and more." : "Automatycznie oznacz pliki na podstawie czynników takich jak: typ pliku, członkostwo użytkownika w grupie, czas, itp.",
     "Each rule group consists of one or more rules. A request matches a group if all rules evaluate to true. On uploading a file all defined groups are evaluated and when matching, the given collaborative tags are assigned to the file." : "Każda grupa reguł składa się z co najmniej jednej reguły. Żądanie pasuje do grupy, jeśli wszystkie reguły są prawdziwe. Po przesłaniu pliku wszystkie zdefiniowane grupy są oceniane, a podczas dopasowywania podane etykiety pasujące są przypisywane do pliku.",
     "Files automated tagging" : "Automatyczne tagowanie plików",
