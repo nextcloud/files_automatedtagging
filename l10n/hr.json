@@ -4,7 +4,6 @@
     "At least one of the given tags is invalid" : "Barem jedna od navedenih oznaka nije valjana",
     "Automated tagging" : "Automatsko označavanje",
     "Automated tagging of files" : "Automatsko označavanje datoteka",
-    "File is accessed" : "Datoteci je pristupljeno",
     "Automatically tag files based on factors such as filetype, user group memberships, time and more." : "Automatsko označavanje datoteka na temelju čimbenika kao što su naziv datoteke, članstvo u korisničkoj grupi, vrijeme i još mnogo toga.",
     "Each rule group consists of one or more rules. A request matches a group if all rules evaluate to true. On uploading a file all defined groups are evaluated and when matching, the given collaborative tags are assigned to the file." : "Svaka skupina pravila sastoji se od jednog ili više pravila. Zahtjev odgovara grupi ako se sva pravila ocijene kao istinita. Sve definirane skupine procjenjuju se prilikom otpremanja datoteke i oznake se dodjeljuju datoteci ako se utvrdi podudaranje.",
     "Files automated tagging" : "Automatsko označavanje datoteka",
