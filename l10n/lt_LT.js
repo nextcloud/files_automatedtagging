@@ -8,6 +8,7 @@ OC.L10N.register(
     "Automated tagging of files" : "Automatinis žymių priskyrimas failams",
     "Automatically tag files based on factors such as filetype, user group memberships, time and more." : "Automatiškai priskirti failams žymes pagal tokius faktorius kaip failo tipas, naudotojų grupė, narystės, laikas ir kt.",
     "Files automated tagging" : "Automatinis duomenų žymėjimas",
+    "Automatically assign collaborative tags to files based on conditions" : "Automatiškai priskirti bendradarbiavimo žymes failams, remiantis sąlygomis",
     "Tag a file" : "Priskirti žymę failui",
     "Tags to assign…" : "Žymės, kurias priskirti…"
 },

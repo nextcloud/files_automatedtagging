@@ -4,7 +4,7 @@
     "At least one of the given tags is invalid" : "Přinejmenším jeden ze zadaných štítků není platný",
     "Automated tagging" : "Automatizované štítkování",
     "Automated tagging of files" : "Automatizované opatřování souborů štítky",
-    "File is accessed" : "K souboru je přistupováno",
+    "File is changed" : "Soubor byl změněn",
     "Automatically tag files based on factors such as filetype, user group memberships, time and more." : "Automaticky oštítkujte soubory podle hledisek jako je typ souboru, členství uživatele ve skupinách, čas a další.",
     "Each rule group consists of one or more rules. A request matches a group if all rules evaluate to true. On uploading a file all defined groups are evaluated and when matching, the given collaborative tags are assigned to the file." : "Každá skupina pravidel obsahuje jedno nebo více pravidel. Požadavek odpovídá skupině, pokud jsou všechna pravidla vyhodnocena jako pravdivá. Při nahrávání souboru jsou vyhodnoceny všechny skupiny a pokud odpovídají, jsou souboru přiřazeny dané štítky pro spolupráci.",
     "Files automated tagging" : "Automatické opatřování souborů štítky",

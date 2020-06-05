@@ -4,7 +4,7 @@
     "At least one of the given tags is invalid" : "Alomenos unha etiqueta das indicadas é incorrecta",
     "Automated tagging" : "Etiquetado automatizado",
     "Automated tagging of files" : "Etiquetado automatizado de ficheiros",
-    "File is accessed" : "Accedeuse a este ficheiro",
+    "File is changed" : "O ficheiro cambiou",
     "Automatically tag files based on factors such as filetype, user group memberships, time and more." : "Etiqueta automaticamente os ficheiros baseándose en factores como o tipo de ficheiro, a pertenza a grupos de usuarios, a hora e outros.",
     "Each rule group consists of one or more rules. A request matches a group if all rules evaluate to true. On uploading a file all defined groups are evaluated and when matching, the given collaborative tags are assigned to the file." : "Cada grupo de regras consiste nunha ou máis regras. Unha solicitude coincide cun grupo se todas as regras se avalían como verdadeiras. Ao enviar un ficheiro avalíanse todos os grupos definidos e se coinciden, esas etiquetas colaborativas asígnanse ao ficheiro,",
     "Files automated tagging" : "Etiquetado automatizado de ficheiros",

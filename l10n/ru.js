@@ -6,7 +6,7 @@ OC.L10N.register(
     "At least one of the given tags is invalid" : "По крайней мере одна метка является неправильной",
     "Automated tagging" : "Автоматическое присвоение меток",
     "Automated tagging of files" : "Автоматическое присвоение меток файлам",
-    "File is accessed" : "Файл доступен",
+    "File is changed" : "Файл изменён",
     "Automatically tag files based on factors such as filetype, user group memberships, time and more." : "Автоматически присваивать метки файлам на основе таких факторов, как тип файла, членство пользователя в группах, время и многое другое.",
     "Each rule group consists of one or more rules. A request matches a group if all rules evaluate to true. On uploading a file all defined groups are evaluated and when matching, the given collaborative tags are assigned to the file." : "Каждая группа правил состоит из одного или более правил. Запрос соответствует группе только если верно каждое из правил. При загрузке файла проверяется соответствие всем группам правил, и, при совпадении, заданные метки присваиваются файлу.",
     "Files automated tagging" : "Автоматическое присвоение меток файлам",
