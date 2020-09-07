@@ -21,35 +21,29 @@
 
 namespace OCA\FilesAutomatedTagging\AppInfo;
 
-use OCA\FilesAutomatedTagging\Operation;
-use OCA\FilesAutomatedTagging\CacheListener;
-use OCA\WorkflowEngine\Manager;
-use OCP\EventDispatcher\IEventDispatcher;
-use OCP\Util;
-use OCP\WorkflowEngine\IManager;
-use Symfony\Component\EventDispatcher\GenericEvent;
+use OCA\FilesAutomatedTagging\Listener\CacheListener;
+use OCA\FilesAutomatedTagging\Listener\RegisterFlowOperationsListener;
+use OCP\AppFramework\App;
+use OCP\AppFramework\Bootstrap\IBootContext;
+use OCP\AppFramework\Bootstrap\IBootstrap;
+use OCP\AppFramework\Bootstrap\IRegistrationContext;
+use OCP\Files\Cache\CacheInsertEvent;
+use OCP\Files\Cache\CacheUpdateEvent;
+use OCP\WorkflowEngine\Events\RegisterOperationsEvent;
 
-class Application extends \OCP\AppFramework\App {
+class Application extends App implements IBootstrap {
 
 	public function __construct() {
 		parent::__construct('files_automatedtagging');
 	}
 
-	/**
-	 * Register all hooks and listeners
-	 */
-	public function registerHooksAndListeners() {
-		/** @var CacheListener $cacheListener */
-		$cacheListener = $this->getContainer()->query(CacheListener::class);
-		$cacheListener->listen();
+	public function register(IRegistrationContext $context): void {
+		$context->registerEventListener(CacheInsertEvent::class, CacheListener::class);
+		$context->registerEventListener(CacheUpdateEvent::class, CacheListener::class);
 
-		\OC::$server->query(IEventDispatcher::class)->addListener(IManager::EVENT_NAME_REG_OPERATION, function (GenericEvent $event) {
-			$operation = \OC::$server->query(Operation::class);
-			$flowManager = $event->getSubject();
-			if($flowManager instanceof Manager) {
-				$flowManager->registerOperation($operation);
-				Util::addScript('files_automatedtagging', 'files_automatedtagging');
-			}
-		});
+		$context->registerEventListener(RegisterOperationsEvent::class, RegisterFlowOperationsListener::class);
+	}
+
+	public function boot(IBootContext $context): void {
 	}
 }
