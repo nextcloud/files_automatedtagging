@@ -19,28 +19,24 @@
  *
  */
 
-namespace OCA\FilesAutomatedTagging;
+namespace OCA\FilesAutomatedTagging\Listener;
 
-use OCP\Files\Cache\CacheInsertEvent;
-use OCP\Files\Cache\CacheUpdateEvent;
-use OCP\Files\Cache\ICacheEvent;
-use Symfony\Component\EventDispatcher\EventDispatcher;
+use OC\Files\Cache\AbstractCacheEvent;
+use OCA\FilesAutomatedTagging\Operation;
+use OCP\EventDispatcher\Event;
+use OCP\EventDispatcher\IEventListener;
 
-class CacheListener {
-	private $eventDispatcher;
+class CacheListener implements IEventListener {
 	private $operation;
 
-	public function __construct(EventDispatcher $eventDispatcher, Operation $operation) {
-		$this->eventDispatcher = $eventDispatcher;
+	public function __construct(Operation $operation) {
 		$this->operation = $operation;
 	}
 
-	public function listen() {
-		$this->eventDispatcher->addListener(CacheInsertEvent::class, [$this, 'onCacheEvent']);
-		$this->eventDispatcher->addListener(CacheUpdateEvent::class, [$this, 'onCacheEvent']);
-	}
-
-	public function onCacheEvent(ICacheEvent $event) {
+	public function handle(Event $event): void {
+		if (!$event instanceof AbstractCacheEvent) {
+			return;
+		}
 		if ($this->operation->isTaggingPath($event->getStorage(), $event->getPath())) {
 			$this->operation->checkOperations($event->getStorage(), $event->getFileId(), $event->getPath());
 		}
