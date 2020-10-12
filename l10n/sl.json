@@ -3,6 +3,7 @@
     "Tag(s) could not be found: %s" : "Navedenih oznak ni mogoče najti: %s",
     "At least one of the given tags is invalid" : "Vsaj ena od podanih oznak ni veljavna",
     "Automated tagging" : "Samodejno označevanje",
+    "File is changed" : "Datoteka je spremenjena",
     "Each rule group consists of one or more rules. A request matches a group if all rules evaluate to true. On uploading a file all defined groups are evaluated and when matching, the given collaborative tags are assigned to the file." : "Vsako skupno pravil sestavlja eno ali več pravil. Zahteva je skladna s skupino, če se vsa pravila potrdijo kot skladna. Pri pošiljanju datoteke v oblak sistem preveri pravila vseh znanih skupin in dodeli ustrezno oznako datoteki.",
     "Files automated tagging" : "Samodejno označevanje datotek",
     "Automatically assign collaborative tags to files based on conditions" : "Samodejno dodeljevanje sodelovalnih oznak datotekam na osnovi določenih pogojev",
