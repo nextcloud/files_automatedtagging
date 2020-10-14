@@ -11,7 +11,6 @@ OC.L10N.register(
     "Each rule group consists of one or more rules. A request matches a group if all rules evaluate to true. On uploading a file all defined groups are evaluated and when matching, the given collaborative tags are assigned to the file." : "Varje regelgrupp består av en eller flera regler. En begäran matchar en grupp om alla regler utvärderas till sant. Vid uppladdning av en fil så blir alla definierade grupper utvärderade och när de matchar så läggs taggarna till på filen.",
     "Files automated tagging" : "Automatisk taggning av filer",
     "Automatically assign collaborative tags to files based on conditions" : "Tilldela automatiskt samarbetstaggar till filer baserat på villkor",
-    "Tag a file" : "Tagga en fil",
-    "Tags to assign…" : "Taggar att tillämpa..."
+    "Tag a file" : "Tagga en fil"
 },
 "nplurals=2; plural=(n != 1);");
