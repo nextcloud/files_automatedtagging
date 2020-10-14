@@ -11,7 +11,6 @@ OC.L10N.register(
     "Each rule group consists of one or more rules. A request matches a group if all rules evaluate to true. On uploading a file all defined groups are evaluated and when matching, the given collaborative tags are assigned to the file." : "Секоја група со правила се состои од едно или повеќе правило. Барањето се совпаѓа со групата ако сите правила се оценат како точни. При прикачување на датотека, сите дефинирани групи се оценуваат и ако се совпаѓаат, зададените ознаки за соработка се доделуваат на датотеката. ",
     "Files automated tagging" : "Автоматско означување на датотеки",
     "Automatically assign collaborative tags to files based on conditions" : "Автоматски доделени ознаки за соработка на датотеки врз основа на зададени услови",
-    "Tag a file" : "Означи датотека",
-    "Tags to assign…" : "Ознаки за доделување..."
+    "Tag a file" : "Означи датотека"
 },
 "nplurals=2; plural=(n % 10 == 1 && n % 100 != 11) ? 0 : 1;");
