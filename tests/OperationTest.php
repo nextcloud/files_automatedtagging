@@ -23,7 +23,10 @@ namespace OCA\FilesAutomatedTagging\Tests;
 
 use OC\Files\Storage\Home;
 use OC\Files\Storage\Local;
+use OCA\Files_External\Lib\Storage\SMB;
 use OCA\FilesAutomatedTagging\Operation;
+use OCP\Files\Mount\IMountManager;
+use OCP\Files\Mount\IMountPoint;
 use OCP\Files\Storage\IStorage;
 use OCP\IConfig;
 use OCP\IL10N;
@@ -53,6 +56,8 @@ class OperationTest extends TestCase {
 	protected $urlGenerator;
 	/** @var IRuleMatcher|MockObject */
 	protected $ruleMatcher;
+	/** @var IMountManager|MockObject */
+	protected $mountManager;
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -76,8 +81,16 @@ class OperationTest extends TestCase {
 
 		$this->urlGenerator = $this->createMock(IURLGenerator::class);
 
+		$this->mountManager = $this->createMock(IMountManager::class);
+
 		$this->operation = new Operation(
-			$this->objectMapper, $this->tagManager, $this->checkManager, $this->l, $this->config, $this->urlGenerator
+			$this->objectMapper,
+			$this->tagManager,
+			$this->checkManager,
+			$this->l,
+			$this->config,
+			$this->urlGenerator,
+			$this->mountManager
 		);
 	}
 
@@ -122,22 +135,36 @@ class OperationTest extends TestCase {
 			->with(false)
 			->willReturn($matches);
 
+		$withConsecutive = [];
+		foreach ($expected as $tags) {
+			$withConsecutive[] = [$fileId, 'files', $tags];
+		}
+
 		foreach ($expected as $key => $tags) {
-			$this->objectMapper->expects($this->at($key))
+			$this->objectMapper->expects($this->any())
 				->method('assignTags')
-				->with($fileId, 'files', $tags);
+				->withConsecutive(...$withConsecutive);
 		}
 
 		$this->operation->checkOperations($storage, $fileId, $file);
 	}
 
 	public function taggingPathDataProvider() {
+		$homeId = 'home::alice';
+		$localId = 'local::/mnt/users/alice';
+		$smbId = 'smb::alice@ser.vr/share/thing';
+		$mountPoint = '/alice/files/NetworkDrive/';
 		return [
-			[Home::class, 'trash/foo', false],
-			[Home::class, 'files/foo', true],
-			[Home::class, 'files', false],
-			[Local::class, 'foo', false],
-			[Local::class, 'appdata_instanceid/foo', false],
+			[Home::class, $homeId, 'trash/foo', false],
+			[Home::class, $homeId, 'files/foo', true],
+			[Home::class, $homeId, 'files', false],
+			[Local::class, $localId, 'foo', false],
+			[Local::class, $localId, 'appdata_instanceid/foo', false],
+			[SMB::class, $smbId, 'in-the-mountpoint.txt', true, $mountPoint],
+			[SMB::class, $smbId, 'sub1/in-the-folder.md', true, $mountPoint],
+			[SMB::class, $smbId, 'somewhere/deeply/nested/so-cozy.mp4', true, $mountPoint],
+			[SMB::class, $smbId, '', true, $mountPoint],
+			[SMB::class, $smbId, '', false, '/alice/files/'],
 		];
 	}
 
@@ -147,12 +174,34 @@ class OperationTest extends TestCase {
 	 * @param string $path
 	 * @param bool $expected
 	 */
-	public function testIsTaggingPath(string $storageClass, string $path, bool $expected) {
+	public function testIsTaggingPath(string $storageClass, string $storageId, string $path, bool $expected, string $mountPointPath = '') {
+		$isLocal = $storageClass === Home::class || $storageClass === Local::class;
+
 		/** @var IStorage|MockObject $storage */
 		$storage = $this->getMockBuilder($storageClass)
 			->disableOriginalConstructor()
 			->setMethodsExcept(['instanceOfStorage'])
 			->getMock();
+
+		$storage->expects($this->any())
+			->method('getId')
+			->willReturn($storageId);
+		$storage->expects($this->any())
+			->method('isLocal')
+			->willReturn($isLocal);
+
+		$mountPoint = $this->createMock(IMountPoint::class);
+		$mountPoint->expects($this->any())
+			->method('getMountType')
+			->willReturn($isLocal ? '' : 'external');
+		$mountPoint->expects($this->any())
+			->method('getMountPoint')
+			->willReturn($mountPointPath);
+
+		$this->mountManager->expects($this->any())
+			->method('findByStorageId')
+			->willReturn([$mountPoint]);
+
 		$this->assertEquals($expected, $this->operation->isTaggingPath($storage, $path));
 	}
 }
