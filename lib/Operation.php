@@ -129,7 +129,7 @@ class Operation implements ISpecificOperation, IComplexOperation {
 			return strpos($file, '__groupfolders') !== 0;
 		}
 
-		if (!$storage->isLocal()) {
+		if (!$storage->isLocal() || strpos($storage->getId(), 'local::') === 0) {
 			$mountPoints = $this->mountManager->findByStorageId($storage->getId());
 			if (!empty($mountPoints) && $mountPoints[0]->getMountType() === 'external') {
 				// it is OK to only look at the first one, if there are many
