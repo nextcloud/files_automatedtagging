@@ -26,6 +26,7 @@ use OCA\GroupFolders\Mount\GroupFolderStorage;
 use OCA\WorkflowEngine\Entity\File;
 use OCP\EventDispatcher\Event;
 use OCP\Files\IHomeStorage;
+use OCP\Files\Mount\IMountManager;
 use OCP\Files\Storage\IStorage;
 use OCP\IConfig;
 use OCP\IL10N;
@@ -57,6 +58,8 @@ class Operation implements ISpecificOperation, IComplexOperation {
 
 	/** @var IURLGenerator */
 	private $urlGenerator;
+	/** @var IMountManager */
+	private $mountManager;
 
 	/**
 	 * @param ISystemTagObjectMapper $objectMapper
@@ -65,13 +68,22 @@ class Operation implements ISpecificOperation, IComplexOperation {
 	 * @param IL10N $l
 	 * @param IConfig $config
 	 */
-	public function __construct(ISystemTagObjectMapper $objectMapper, ISystemTagManager $tagManager, IManager $checkManager, IL10N $l, IConfig $config, IURLGenerator $urlGenerator) {
+	public function __construct(
+		ISystemTagObjectMapper $objectMapper,
+		ISystemTagManager $tagManager,
+		IManager $checkManager,
+		IL10N $l,
+		IConfig $config,
+		IURLGenerator $urlGenerator,
+		IMountManager $mountManager
+	) {
 		$this->objectMapper = $objectMapper;
 		$this->tagManager = $tagManager;
 		$this->checkManager = $checkManager;
 		$this->l = $l;
 		$this->config = $config;
 		$this->urlGenerator = $urlGenerator;
+		$this->mountManager = $mountManager;
 	}
 
 	/**
@@ -115,6 +127,24 @@ class Operation implements ISpecificOperation, IComplexOperation {
 		if ($storage->instanceOfStorage(GroupFolderStorage::class)) {
 			// We do not tag the roots of groupfolders, but every path inside we do
 			return strpos($file, '__groupfolders') !== 0;
+		}
+
+		if (!$storage->isLocal() || strpos($storage->getId(), 'local::') === 0) {
+			$mountPoints = $this->mountManager->findByStorageId($storage->getId());
+			if (!empty($mountPoints) && $mountPoints[0]->getMountType() === 'external') {
+				// it is OK to only look at the first one, if there are many
+				if (!empty($file)) {
+					// a file somewhere on the storage is always OK
+					return true;
+				}
+
+				// external storages are always ok as long as not mounted as user root
+				$mountPointPath = rtrim($mountPoints[0]->getMountPoint(), '/');
+				$mountPointPieces = explode('/', $mountPointPath);
+				$mountPointName = array_pop($mountPointPieces);
+				// user root structure: /$USER_ID/files
+				return ($mountPointName !== 'files' || count($mountPointPieces) !== 2);
+			}
 		}
 
 		if (substr_count($file, '/') === 0) {
