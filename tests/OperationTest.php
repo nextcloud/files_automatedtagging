@@ -154,17 +154,22 @@ class OperationTest extends TestCase {
 		$localId = 'local::/mnt/users/alice';
 		$smbId = 'smb::alice@ser.vr/share/thing';
 		$mountPoint = '/alice/files/NetworkDrive/';
+		$userHomeMountPoint = '/alice/files/';
 		return [
 			[Home::class, $homeId, 'trash/foo', false],
 			[Home::class, $homeId, 'files/foo', true],
 			[Home::class, $homeId, 'files', false],
-			[Local::class, $localId, 'foo', false],
+			[Local::class, $localId, '', false, $userHomeMountPoint],
+			[Local::class, $localId, 'foo', true, $userHomeMountPoint],
+			[Local::class, $localId, 'foo', true, $mountPoint],
 			[Local::class, $localId, 'appdata_instanceid/foo', false],
+			[SMB::class, $smbId, 'in-the-mountpoint.txt', true, $userHomeMountPoint],
 			[SMB::class, $smbId, 'in-the-mountpoint.txt', true, $mountPoint],
 			[SMB::class, $smbId, 'sub1/in-the-folder.md', true, $mountPoint],
+			[SMB::class, $smbId, 'somewhere/deeply/nested/so-cozy.mp4', true, $userHomeMountPoint],
 			[SMB::class, $smbId, 'somewhere/deeply/nested/so-cozy.mp4', true, $mountPoint],
 			[SMB::class, $smbId, '', true, $mountPoint],
-			[SMB::class, $smbId, '', false, '/alice/files/'],
+			[SMB::class, $smbId, '', false, $userHomeMountPoint],
 		];
 	}
 
@@ -193,7 +198,7 @@ class OperationTest extends TestCase {
 		$mountPoint = $this->createMock(IMountPoint::class);
 		$mountPoint->expects($this->any())
 			->method('getMountType')
-			->willReturn($isLocal ? '' : 'external');
+			->willReturn($mountPointPath === '' ? '' : 'external');
 		$mountPoint->expects($this->any())
 			->method('getMountPoint')
 			->willReturn($mountPointPath);
