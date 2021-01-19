@@ -5,6 +5,7 @@
     "Automated tagging" : "Samodejno označevanje",
     "Automated tagging of files" : "Samodejno označevanje datotek",
     "File is changed" : "Datoteka je spremenjena",
+    "Automatically tag files based on factors such as filetype, user group memberships, time and more." : "Samodejno označi datoteke na podlagi podatkov, kot so vrsta datoteke, članstvo v skupini, čas in drugo.",
     "Each rule group consists of one or more rules. A request matches a group if all rules evaluate to true. On uploading a file all defined groups are evaluated and when matching, the given collaborative tags are assigned to the file." : "Vsako skupno pravil sestavlja eno ali več pravil. Zahteva je skladna s skupino, če se vsa pravila potrdijo kot skladna. Pri pošiljanju datoteke v oblak sistem preveri pravila vseh znanih skupin in dodeli ustrezno oznako datoteki.",
     "Files automated tagging" : "Samodejno označevanje datotek",
     "Automatically assign collaborative tags to files based on conditions" : "Samodejno dodeljevanje sodelovalnih oznak datotekam na osnovi določenih pogojev",
