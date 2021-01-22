@@ -21,7 +21,6 @@
 
 namespace OCA\FilesAutomatedTagging;
 
-
 use InvalidArgumentException;
 use OCA\GroupFolders\Mount\GroupFolderStorage;
 use OCA\WorkflowEngine\Entity\File;
@@ -150,7 +149,7 @@ class Operation implements ISpecificOperation, IComplexOperation {
 		}
 
 		if ($storage->instanceOfStorage(IHomeStorage::class)) {
-			list($folder) = explode('/', $file, 2);
+			[$folder] = explode('/', $file, 2);
 			return $folder === 'files';
 		} else {
 			[$folder, $subPath] = explode('/', $file, 2);

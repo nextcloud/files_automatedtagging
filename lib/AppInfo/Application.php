@@ -32,7 +32,6 @@ use OCP\Files\Cache\CacheEntryUpdatedEvent;
 use OCP\WorkflowEngine\Events\RegisterOperationsEvent;
 
 class Application extends App implements IBootstrap {
-
 	public function __construct() {
 		parent::__construct('files_automatedtagging');
 	}
