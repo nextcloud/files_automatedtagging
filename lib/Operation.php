@@ -22,6 +22,7 @@
 namespace OCA\FilesAutomatedTagging;
 
 
+use InvalidArgumentException;
 use OCA\GroupFolders\Mount\GroupFolderStorage;
 use OCA\WorkflowEngine\Entity\File;
 use OCP\EventDispatcher\Event;
@@ -38,6 +39,8 @@ use OCP\WorkflowEngine\IComplexOperation;
 use OCP\WorkflowEngine\IManager;
 use OCP\WorkflowEngine\IRuleMatcher;
 use OCP\WorkflowEngine\ISpecificOperation;
+use RuntimeException;
+use UnexpectedValueException;
 
 class Operation implements ISpecificOperation, IComplexOperation {
 
@@ -86,12 +89,7 @@ class Operation implements ISpecificOperation, IComplexOperation {
 		$this->mountManager = $mountManager;
 	}
 
-	/**
-	 * @param IStorage $storage
-	 * @param int $fileId
-	 * @param string $file
-	 */
-	public function checkOperations(IStorage $storage, $fileId, $file) {
+	public function checkOperations(IStorage $storage, int $fileId, string $file): void {
 		$matcher = $this->checkManager->getRuleMatcher();
 		$matcher->setFileInfo($storage, $file);
 		$matcher->setOperation($this);
@@ -106,20 +104,20 @@ class Operation implements ISpecificOperation, IComplexOperation {
 	 * @param string $name
 	 * @param array[] $checks
 	 * @param string $operation
-	 * @throws \UnexpectedValueException
+	 * @throws UnexpectedValueException
 	 */
 	public function validateOperation(string $name, array $checks, string $operation): void {
 		if ($operation === '') {
-			throw new \UnexpectedValueException($this->l->t('No tags given'));
+			throw new UnexpectedValueException($this->l->t('No tags given'));
 		}
 
 		$systemTagIds = explode(',', $operation);
 		try {
 			$this->tagManager->getTagsByIds($systemTagIds);
 		} catch (TagNotFoundException $e) {
-			throw new \UnexpectedValueException($this->l->t('Tag(s) could not be found: %s', implode(', ', $e->getMissingTags())));
-		} catch (\InvalidArgumentException $e) {
-			throw new \UnexpectedValueException($this->l->t('At least one of the given tags is invalid'));
+			throw new UnexpectedValueException($this->l->t('Tag(s) could not be found: %s', implode(', ', $e->getMissingTags())));
+		} catch (InvalidArgumentException $e) {
+			throw new UnexpectedValueException($this->l->t('At least one of the given tags is invalid'));
 		}
 	}
 
@@ -163,10 +161,10 @@ class Operation implements ISpecificOperation, IComplexOperation {
 		}
 	}
 
-	private function getAppDataFolderName() {
+	private function getAppDataFolderName(): string {
 		$instanceId = $this->config->getSystemValue('instanceid', null);
 		if ($instanceId === null) {
-			throw new \RuntimeException('no instance id!');
+			throw new RuntimeException('no instance id!');
 		}
 
 		return 'appdata_' . $instanceId;
@@ -237,7 +235,7 @@ class Operation implements ISpecificOperation, IComplexOperation {
 	 *
 	 * @since 18.0.0
 	 */
-	public function onEvent(string $eventName, Event $event, IRuleMatcher $matcher): void {
+	public function onEvent(string $eventName, Event $event, IRuleMatcher $ruleMatcher): void {
 		// Assigning tags is handled though the cache listener
 	}
 
