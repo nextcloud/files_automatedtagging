@@ -25,12 +25,14 @@ clean:
 	rm -rf $(build_dir)
 	rm -rf node_modules
 	rm -rf js/*
+	rm -rf vendor/
 
 .PHONY: build
 build:
 	mkdir -p js/
 	npm ci
 	npm run build
+	#composer install --no-dev  #commented, because there are no no-dev deps
 
 .PHONY: appstore
 appstore: clean build
@@ -38,10 +40,12 @@ appstore: clean build
 	rsync -a \
 	--exclude=/.babelrc.js \
 	--exclude=/build \
+	--exclude=/composer.* \
 	--exclude=/docs \
 	--exclude=/.eslintrc.js \
 	--exclude=/package-lock.json \
 	--exclude=/package.json \
+	--exclude=/.php_cs.* \
 	--exclude=/node_modules \
 	--exclude=/translationfiles \
 	--exclude=/.tx \
