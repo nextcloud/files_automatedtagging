@@ -13,6 +13,7 @@ CVS/*
 .svn/*
 RCS/*
 *.backup*
+.php_cs.cache
 
 # kdevelop
 .kdev
@@ -60,3 +61,4 @@ node_modules
 
 # packaging
 /build/
+/vendor/

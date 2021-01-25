@@ -28,7 +28,6 @@ use OCP\EventDispatcher\IEventDispatcher;
 use OCP\IL10N;
 use OCP\Settings\ISettings;
 use OCP\Util;
-use OCP\WorkflowEngine\Events\LoadSettingsScriptsEvent;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class Admin implements ISettings {
@@ -49,7 +48,7 @@ class Admin implements ISettings {
 	 * @param IL10N $l
 	 * @param EventDispatcherInterface $legacyEventDispatcher
 	 */
-	public function __construct($appName, IL10N $l, EventDispatcherInterface $legacyEventDispatcher, IEventDispatcher $eventDispatcher) {
+	public function __construct(string $appName, IL10N $l, EventDispatcherInterface $legacyEventDispatcher, IEventDispatcher $eventDispatcher) {
 		$this->appName = $appName;
 		$this->l10n = $l;
 		$this->legacyEventDispatcher = $legacyEventDispatcher;
@@ -60,9 +59,6 @@ class Admin implements ISettings {
 	 * @return TemplateResponse
 	 */
 	public function getForm() {
-		// @deprecated in 20.0.0: retire this one in favor of the typed event
-		$this->legacyEventDispatcher->dispatch('OCP\WorkflowEngine::loadAdditionalSettingScripts');
-		$this->eventDispatcher->dispatchTyped(new LoadSettingsScriptsEvent());
 		Util::addScript($this->appName, 'admin');
 		$parameters = [
 			'appid' => $this->appName,
@@ -92,5 +88,4 @@ class Admin implements ISettings {
 	public function getPriority() {
 		return 75;
 	}
-
 }
