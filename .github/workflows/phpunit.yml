@@ -47,7 +47,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-versions }}
-          extensions: mbstring, iconv, fileinfo, intl, sqlite, pdo_sqlite
+          extensions: mbstring, iconv, fileinfo, intl, sqlite, pdo_sqlite, zip, gd
           tools: phpunit:8.5.13
           coverage: none
 
@@ -109,7 +109,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-versions }}
-          extensions: mbstring, iconv, fileinfo, intl, mysql, pdo_mysql
+          extensions: mbstring, iconv, fileinfo, intl, mysql, pdo_mysql, zip, gd
           tools: phpunit:8.5.13
           coverage: none
 
@@ -173,7 +173,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-versions }}
-          extensions: mbstring, iconv, fileinfo, intl, pgsql, pdo_pgsql
+          extensions: mbstring, iconv, fileinfo, intl, pgsql, pdo_pgsql, zip, gd
           tools: phpunit:8.5.13
           coverage: none
 
@@ -232,7 +232,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-versions }}
-          extensions: mbstring, iconv, fileinfo, intl, oci8
+          extensions: mbstring, iconv, fileinfo, intl, oci8, zip, gd
           tools: phpunit:8.5.13
           coverage: none
 
