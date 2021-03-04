@@ -21,7 +21,7 @@
 		"stylelint:fix": "stylelint src --fix"
 	},
 	"dependencies": {
-		"@babel/runtime": "^7.13.8",
+		"@babel/runtime": "^7.13.9",
 		"@nextcloud/l10n": "^1.4.1",
 		"@nextcloud/vue": "^3.7.0",
 		"vue": "^2.6.12"
