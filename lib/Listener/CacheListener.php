@@ -23,7 +23,7 @@ declare(strict_types=1);
 
 namespace OCA\FilesAutomatedTagging\Listener;
 
-use OC\Files\Cache\AbstractCacheEvent;
+use OCP\Files\Cache\AbstractCacheEvent;
 use OCA\FilesAutomatedTagging\Operation;
 use OCP\EventDispatcher\Event;
 use OCP\EventDispatcher\IEventListener;
