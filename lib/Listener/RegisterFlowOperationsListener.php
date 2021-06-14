@@ -46,6 +46,6 @@ class RegisterFlowOperationsListener implements IEventListener {
 		}
 		$operation = $this->container->get(Operation::class);
 		$event->registerOperation($operation);
-		Util::addScript('files_automatedtagging', 'files_automatedtagging');
+		Util::addScript('files_automatedtagging', 'files_automatedtagging-main');
 	}
 }

@@ -52,9 +52,7 @@ appstore: clean build
 	--exclude=/tests \
 	--exclude=/src \
 	--exclude=/.stylelintrc.js \
-	--exclude=/webpack.common.js \
-	--exclude=/webpack.dev.js \
-	--exclude=/webpack.prod.js \
+	--exclude=/webpack.js \
 	--exclude=/.drone.yml \
 	--exclude=/.git \
 	--exclude=/.github \
