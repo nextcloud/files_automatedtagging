@@ -38,35 +38,30 @@ build:
 appstore: clean build
 	mkdir -p $(sign_dir)
 	rsync -a \
-	--exclude=/.babelrc.js \
+	--exclude=/.git \
+	--exclude=/.github \
 	--exclude=/build \
-	--exclude=/composer.* \
 	--exclude=/docs \
+	--exclude=/node_modules \
+	--exclude=/src \
+	--exclude=/tests \
+	--exclude=/babel.config.js \
+	--exclude=/composer.* \
+	--exclude=/.drone.yml \
 	--exclude=/.eslintrc.js \
+	--exclude=/.gitattributes \
+	--exclude=/.gitignore \
+	--exclude=/.l10nignore \
+	--exclude=/l10n/l10n.pl \
+	--exclude=/Makefile \
 	--exclude=/package-lock.json \
 	--exclude=/package.json \
 	--exclude=/.php_cs.* \
-	--exclude=/node_modules \
+	--exclude=/stylelint.config.js \
 	--exclude=/translationfiles \
 	--exclude=/.tx \
-	--exclude=/tests \
-	--exclude=/src \
-	--exclude=/.stylelintrc.js \
-	--exclude=/webpack.common.js \
-	--exclude=/webpack.dev.js \
-	--exclude=/webpack.prod.js \
-	--exclude=/.drone.yml \
-	--exclude=/.git \
-	--exclude=/.github \
-	--exclude=/l10n/l10n.pl \
-	--exclude=/CONTRIBUTING.md \
-	--exclude=/issue_template.md \
+	--exclude=/webpack.js \
 	--exclude=/README.md \
-	--exclude=/.gitattributes \
-	--exclude=/.gitignore \
-	--exclude=/.scrutinizer.yml \
-	--exclude=/.travis.yml \
-	--exclude=/Makefile \
 	$(project_dir)/ $(sign_dir)/$(app_name)
 	tar -czf $(build_dir)/$(app_name)-$(version).tar.gz \
 		-C $(sign_dir) $(app_name)
