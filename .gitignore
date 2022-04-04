@@ -52,8 +52,7 @@ nbproject
 /.buildpath
 
 # Tests - auto-generated files
-/tests/coverage*
-/tests/clover.xml
+/tests/.phpunit.result.cache
 
 # node
 node_modules
