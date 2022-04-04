@@ -30,6 +30,7 @@ if (!class_exists('PHPUnit\Framework\TestCase')) {
 }
 
 // Fix for "Autoload path not allowed: .../files_automatedtagging/tests/..."
+\OC_App::loadApp('files_external');
 \OC_App::loadApp('files_automatedtagging');
 
 OC_Hook::clear();
