@@ -56,7 +56,8 @@ appstore: clean build
 	--exclude=/Makefile \
 	--exclude=/package-lock.json \
 	--exclude=/package.json \
-	--exclude=/.php_cs.* \
+	--exclude=/.php-cs-fixer.cache \
+	--exclude=/.php-cs-fixer.dist.php \
 	--exclude=/stylelint.config.js \
 	--exclude=/translationfiles \
 	--exclude=/.tx \

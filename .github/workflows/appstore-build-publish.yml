@@ -27,10 +27,9 @@ jobs:
 
       - name: Set app env
         run: |
-          # Split and keep last 
+          # Split and keep last
           echo "APP_NAME=${GITHUB_REPOSITORY##*/}" >> $GITHUB_ENV
           echo "APP_VERSION=${GITHUB_REF##*/}" >> $GITHUB_ENV
-
       - name: Checkout
         uses: actions/checkout@v3
         with:
@@ -82,7 +81,6 @@ jobs:
         run: |
           cd ${{ env.APP_NAME }}
           composer install --no-dev
-
       - name: Build ${{ env.APP_NAME }}
         # Skip if no package.json
         if: ${{ steps.versions.outputs.nodeVersion }}
@@ -90,18 +88,27 @@ jobs:
           cd ${{ env.APP_NAME }}
           npm ci
           npm run build
+      - name: Check Krankerl config
+        id: krankerl
+        uses: andstor/file-existence-action@v1
+        with:
+          files: ${{ env.APP_NAME }}/krankerl.toml
 
       - name: Install Krankerl
+        if: steps.krankerl.outputs.files_exists == 'true'
         run: |
           wget https://github.com/ChristophWurst/krankerl/releases/download/v0.13.0/krankerl_0.13.0_amd64.deb
           sudo dpkg -i krankerl_0.13.0_amd64.deb
-
-      - name: Package ${{ env.APP_NAME }} ${{ env.APP_VERSION }}
-        # Try krankerl, fallback to makefile
+      - name: Package ${{ env.APP_NAME }} ${{ env.APP_VERSION }} with krankerl
+        if: steps.krankerl.outputs.files_exists == 'true'
         run: |
           cd ${{ env.APP_NAME }}
-          krankerl package || make appstore
-
+          krankerl package
+      - name: Package ${{ env.APP_NAME }} ${{ env.APP_VERSION }} with makefile
+        if: steps.krankerl.outputs.files_exists != 'true'
+        run: |
+          cd ${{ env.APP_NAME }}
+          make appstore
       - name: Checkout server ${{ fromJSON(steps.appinfo.outputs.result).nextcloud.min-version }}
         continue-on-error: true
         id: server-checkout
@@ -109,7 +116,6 @@ jobs:
           NCVERSION=${{ fromJSON(steps.appinfo.outputs.result).nextcloud.min-version }}
           wget --quiet https://download.nextcloud.com/server/releases/latest-$NCVERSION.zip
           unzip latest-$NCVERSION.zip
-
       - name: Checkout server master fallback
         uses: actions/checkout@v3
         if: ${{ steps.server-checkout.outcome != 'success' }}
@@ -131,7 +137,6 @@ jobs:
           # Rebuilding archive
           cd ${{ env.APP_NAME }}/build/artifacts
           tar -zcvf ${{ env.APP_NAME }}.tar.gz ${{ env.APP_NAME }}
-
       - name: Attach tarball to github release
         uses: svenstaro/upload-release-action@v2
         id: attach_to_release
