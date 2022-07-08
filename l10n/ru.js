@@ -3,7 +3,7 @@ OC.L10N.register(
     {
     "No tags given" : "Метки не заданы",
     "Tag(s) could not be found: %s" : "Метка(и) не найдена: %s",
-    "At least one of the given tags is invalid" : "По крайней мере одна метка является неправильной",
+    "At least one of the given tags is invalid" : "По крайней мере одна метка является недопустимой",
     "Automated tagging" : "Автоматическое присвоение меток",
     "Automated tagging of files" : "Автоматическое присвоение меток файлам",
     "File is changed" : "Файл изменён",
