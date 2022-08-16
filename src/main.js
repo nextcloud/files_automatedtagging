@@ -1,4 +1,4 @@
-import Tag from './Tag'
+import Tag from './Tag.vue'
 
 window.OCA.WorkflowEngine.registerOperator({
 	id: 'OCA\\FilesAutomatedTagging\\Operation',
