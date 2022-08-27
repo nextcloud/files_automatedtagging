@@ -23,7 +23,7 @@
 	"dependencies": {
 		"@nextcloud/l10n": "^1.6.0",
 		"@nextcloud/vue": "^5.4.0",
-		"vue": "^2.7.9"
+		"vue": "^2.7.10"
 	},
 	"browserslist": [
 		"extends @nextcloud/browserslist-config"
@@ -38,6 +38,6 @@
 		"@nextcloud/eslint-config": "^8.1.2",
 		"@nextcloud/stylelint-config": "^2.2.0",
 		"@nextcloud/webpack-vue-config": "^5.3.0",
-		"vue-template-compiler": "^2.7.9"
+		"vue-template-compiler": "^2.7.10"
 	}
 }
