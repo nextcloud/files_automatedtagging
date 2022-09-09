@@ -25,18 +25,18 @@ declare(strict_types=1);
 
 namespace OCA\FilesAutomatedTagging\Listener;
 
+use OCA\FilesAutomatedTagging\AppInfo\Application;
 use OCA\FilesAutomatedTagging\Operation;
 use OCP\EventDispatcher\Event;
 use OCP\EventDispatcher\IEventListener;
-use OCP\IServerContainer;
 use OCP\Util;
 use OCP\WorkflowEngine\Events\RegisterOperationsEvent;
+use Psr\Container\ContainerInterface;
 
 class RegisterFlowOperationsListener implements IEventListener {
-	/** @var IServerContainer */
-	private $container;
+	private ContainerInterface $container;
 
-	public function __construct(IServerContainer $container) {
+	public function __construct(ContainerInterface $container) {
 		$this->container = $container;
 	}
 
@@ -46,6 +46,6 @@ class RegisterFlowOperationsListener implements IEventListener {
 		}
 		$operation = $this->container->get(Operation::class);
 		$event->registerOperation($operation);
-		Util::addScript('files_automatedtagging', 'files_automatedtagging-main');
+		Util::addScript(Application::APPID, 'files_automatedtagging-main');
 	}
 }

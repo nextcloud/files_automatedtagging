@@ -32,8 +32,10 @@ use OCP\Files\Cache\CacheEntryUpdatedEvent;
 use OCP\WorkflowEngine\Events\RegisterOperationsEvent;
 
 class Application extends App implements IBootstrap {
+	public const APPID = 'files_automatedtagging';
+
 	public function __construct() {
-		parent::__construct('files_automatedtagging');
+		parent::__construct(self::APPID);
 	}
 
 	public function register(IRegistrationContext $context): void {

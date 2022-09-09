@@ -29,7 +29,7 @@ use OCP\EventDispatcher\Event;
 use OCP\EventDispatcher\IEventListener;
 
 class CacheListener implements IEventListener {
-	private $operation;
+	private Operation $operation;
 
 	public function __construct(Operation $operation) {
 		$this->operation = $operation;
