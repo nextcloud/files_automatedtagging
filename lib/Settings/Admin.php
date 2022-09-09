@@ -29,7 +29,6 @@ use OCP\Settings\ISettings;
 use OCP\Util;
 
 class Admin implements ISettings {
-
 	private IL10N $l10n;
 	private string $appName;
 

@@ -39,7 +39,6 @@ use PHPUnit\Framework\MockObject\MockObject;
 use Test\TestCase;
 
 class OperationTest extends TestCase {
-
 	/** @var ISystemTagObjectMapper|MockObject */
 	protected $objectMapper;
 	/** @var ISystemTagManager|MockObject */

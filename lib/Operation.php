@@ -43,7 +43,6 @@ use RuntimeException;
 use UnexpectedValueException;
 
 class Operation implements ISpecificOperation, IComplexOperation {
-
 	protected ISystemTagObjectMapper $objectMapper;
 	protected ISystemTagManager $tagManager;
 	protected IManager $checkManager;
