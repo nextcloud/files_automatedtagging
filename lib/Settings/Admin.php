@@ -24,41 +24,21 @@
 namespace OCA\FilesAutomatedTagging\Settings;
 
 use OCP\AppFramework\Http\TemplateResponse;
-use OCP\EventDispatcher\IEventDispatcher;
 use OCP\IL10N;
 use OCP\Settings\ISettings;
 use OCP\Util;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class Admin implements ISettings {
 
-	/** @var IL10N */
-	private $l10n;
+	private IL10N $l10n;
+	private string $appName;
 
-	/** @var string */
-	private $appName;
-
-	/** @var EventDispatcherInterface */
-	private $legacyEventDispatcher;
-	/** @var IEventDispatcher */
-	private $eventDispatcher;
-
-	/**
-	 * @param string $appName
-	 * @param IL10N $l
-	 * @param EventDispatcherInterface $legacyEventDispatcher
-	 */
-	public function __construct(string $appName, IL10N $l, EventDispatcherInterface $legacyEventDispatcher, IEventDispatcher $eventDispatcher) {
+	public function __construct(string $appName, IL10N $l) {
 		$this->appName = $appName;
 		$this->l10n = $l;
-		$this->legacyEventDispatcher = $legacyEventDispatcher;
-		$this->eventDispatcher = $eventDispatcher;
 	}
 
-	/**
-	 * @return TemplateResponse
-	 */
-	public function getForm() {
+	public function getForm(): TemplateResponse {
 		Util::addScript($this->appName, 'admin');
 		$parameters = [
 			'appid' => $this->appName,
@@ -71,21 +51,11 @@ class Admin implements ISettings {
 		return new TemplateResponse('workflowengine', 'admin', $parameters, 'blank');
 	}
 
-	/**
-	 * @return string the section ID, e.g. 'sharing'
-	 */
-	public function getSection() {
+	public function getSection(): string {
 		return 'workflow';
 	}
 
-	/**
-	 * @return int whether the form should be rather on the top or bottom of
-	 * the admin section. The forms are arranged in ascending order of the
-	 * priority values. It is required to return a value between 0 and 100.
-	 *
-	 * E.g.: 70
-	 */
-	public function getPriority() {
+	public function getPriority(): int {
 		return 75;
 	}
 }
