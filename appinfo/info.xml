@@ -12,7 +12,7 @@ The tags can later be used to control retention, file access, automatic script e
 To define tags, administrators can create and manage a set of rule groups. Each rule group consists of one or more rules combined through operators. Rules can include criteria like file type, size, time and more. A request matches a group if all rules evaluate to true. On uploading a file all defined groups are evaluated and when matching, the given tags are assigned to the file.
 	</description>
 
-	<version>1.15.0</version>
+	<version>1.16.0</version>
 	<licence>agpl</licence>
 	<author>Joas Schilling</author>
 	<namespace>FilesAutomatedTagging</namespace>
@@ -34,6 +34,6 @@ To define tags, administrators can create and manage a set of rule groups. Each 
 	<repository>https://github.com/nextcloud/files_automatedtagging.git</repository>
 	<screenshot>https://raw.githubusercontent.com/nextcloud/files_automatedtagging/master/docs/screenshot.png</screenshot>
 	<dependencies>
-		<nextcloud min-version="25" max-version="25" />
+		<nextcloud min-version="26" max-version="26" />
 	</dependencies>
 </info>
