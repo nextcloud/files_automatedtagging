@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import MultiselectTags from '@nextcloud/vue/dist/Components/MultiselectTags.js'
+import MultiselectTags from '@nextcloud/vue/dist/Components/NcMultiselectTags.js'
 
 export default {
 	name: 'Tag',
