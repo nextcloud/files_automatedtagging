@@ -22,7 +22,7 @@
 	},
 	"dependencies": {
 		"@nextcloud/l10n": "^1.6.0",
-		"@nextcloud/vue": "^5.4.0",
+		"@nextcloud/vue": "^7.0.1",
 		"vue": "^2.7.13"
 	},
 	"browserslist": [
