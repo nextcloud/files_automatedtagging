@@ -27,7 +27,9 @@ use OCA\GroupFolders\Mount\GroupFolderStorage;
 use OCA\WorkflowEngine\Entity\File;
 use OCP\EventDispatcher\Event;
 use OCP\Files\IHomeStorage;
+use OCP\Files\IRootFolder;
 use OCP\Files\Mount\IMountManager;
+use OCP\Files\Node;
 use OCP\Files\Storage\IStorage;
 use OCP\IConfig;
 use OCP\IL10N;
@@ -50,6 +52,8 @@ class Operation implements ISpecificOperation, IComplexOperation {
 	private IConfig $config;
 	private IURLGenerator $urlGenerator;
 	private IMountManager $mountManager;
+	private IRootFolder $rootFolder;
+	private File $fileEntity;
 
 	public function __construct(
 		ISystemTagObjectMapper $objectMapper,
@@ -58,7 +62,9 @@ class Operation implements ISpecificOperation, IComplexOperation {
 		IL10N $l,
 		IConfig $config,
 		IURLGenerator $urlGenerator,
-		IMountManager $mountManager
+		IMountManager $mountManager,
+		IRootFolder $rootFolder,
+		File $fileEntity
 	) {
 		$this->objectMapper = $objectMapper;
 		$this->tagManager = $tagManager;
@@ -67,12 +73,21 @@ class Operation implements ISpecificOperation, IComplexOperation {
 		$this->config = $config;
 		$this->urlGenerator = $urlGenerator;
 		$this->mountManager = $mountManager;
+		$this->rootFolder = $rootFolder;
+		$this->fileEntity = $fileEntity;
 	}
 
 	public function checkOperations(IStorage $storage, int $fileId, string $file): void {
 		$matcher = $this->checkManager->getRuleMatcher();
 		$matcher->setFileInfo($storage, $file);
+		$nodes = $this->rootFolder->getById($fileId);
+		$node = current($nodes);
+		if ($node instanceof Node) {
+			$matcher->setEntitySubject($this->fileEntity, $node);
+		}
 		$matcher->setOperation($this);
+
+
 		$matches = $matcher->getFlows(false);
 
 		foreach ($matches as $match) {

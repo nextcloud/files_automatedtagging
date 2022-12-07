@@ -25,6 +25,8 @@ use OC\Files\Storage\Home;
 use OC\Files\Storage\Local;
 use OCA\Files_External\Lib\Storage\SMB;
 use OCA\FilesAutomatedTagging\Operation;
+use OCP\Files\File;
+use OCP\Files\IRootFolder;
 use OCP\Files\Mount\IMountManager;
 use OCP\Files\Mount\IMountPoint;
 use OCP\Files\Storage\IStorage;
@@ -81,6 +83,8 @@ class OperationTest extends TestCase {
 		$this->urlGenerator = $this->createMock(IURLGenerator::class);
 
 		$this->mountManager = $this->createMock(IMountManager::class);
+		$this->rootFolder = $this->createMock(IRootFolder::class);
+		$this->fileEntity = $this->createMock(\OCA\WorkflowEngine\Entity\File::class);
 
 		$this->operation = new Operation(
 			$this->objectMapper,
@@ -89,7 +93,9 @@ class OperationTest extends TestCase {
 			$this->l,
 			$this->config,
 			$this->urlGenerator,
-			$this->mountManager
+			$this->mountManager,
+			$this->rootFolder,
+			$this->fileEntity
 		);
 	}
 
@@ -127,12 +133,19 @@ class OperationTest extends TestCase {
 			->method('setFileInfo')
 			->with($storage, $file);
 		$this->ruleMatcher->expects($this->once())
+			->method('setEntitySubject');
+		$this->ruleMatcher->expects($this->once())
 			->method('setOperation')
 			->with($this->operation);
 		$this->ruleMatcher->expects($this->once())
 			->method('getFlows')
 			->with(false)
 			->willReturn($matches);
+		$node = $this->createMock(File::class);
+		$this->rootFolder->expects($this->once())
+			->method('getById')
+			->with($fileId)
+			->willReturn([$node]);
 
 		$withConsecutive = [];
 		foreach ($expected as $tags) {
