@@ -2,7 +2,7 @@ OC.L10N.register(
     "files_automatedtagging",
     {
     "No tags given" : "Keine Tags ausgewählt",
-    "Tag(s) could not be found: %s" : "Tag(s) nicht gefunden: %s",
+    "Tag(s) could not be found: %s" : "Schlagwort(e) nicht gefunden: %s",
     "At least one of the given tags is invalid" : "Mindestens eines der Tags ist ungültig",
     "Automated tagging" : "Schlagworte automatisch zuweisen",
     "Automated tagging of files" : "Schlagworte automatisch zuweisen",
