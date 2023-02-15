@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## 1.14.0 – 2022-04-12
+## 1.15.1 – 2023-02-15
 ### Changed
-- Nextcloud 24 compatibility
+* [Make app work with IEntityCheck checks (#642)](https://github.com/nextcloud/files_automatedtagging/pull/642)
+* [Also tag group folder root (#673)](https://github.com/nextcloud/files_automatedtagging/pull/673)
+
+## 1.15.0 – 2022-09-09
+### Changed
+- Nextcloud 25 compatibility
