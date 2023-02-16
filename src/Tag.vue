@@ -21,15 +21,15 @@
   -->
 
 <template>
-	<MultiselectTags :value="integerValue" :multiple="false" @input="emitInput" />
+	<NcSelectTags :value="integerValue" :multiple="false" @input="emitInput" />
 </template>
 
 <script>
-import MultiselectTags from '@nextcloud/vue/dist/Components/MultiselectTags.js'
+import NcSelectTags from '@nextcloud/vue/dist/Components/NcSelectTags.js'
 
 export default {
 	name: 'Tag',
-	components: { MultiselectTags },
+	components: { NcSelectTags },
 	props: {
 		value: {
 			type: String,
