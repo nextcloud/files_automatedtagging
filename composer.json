@@ -3,7 +3,7 @@
 		"cs:check": "php-cs-fixer fix --dry-run --diff",
 		"cs:fix": "php-cs-fixer fix",
 		"lint": "find . -name \\*.php -not -path './vendor/*' -not -path './build/*' -print0 | xargs -0 -n1 php -l",
-		"test:unit": "vendor/bin/phpunit -c tests/phpunit.xml"
+		"test:unit": "vendor/bin/phpunit -c tests/phpunit.xml --color"
 	},
 	"config": {
 		"optimize-autoloader": true,
