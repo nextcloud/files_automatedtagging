@@ -31,10 +31,15 @@ use OCP\Files\Mount\IMountManager;
 use OCP\Files\Mount\IMountPoint;
 use OCP\Files\Storage\IStorage;
 use OCP\IConfig;
+use OCP\IGroupManager;
 use OCP\IL10N;
 use OCP\IURLGenerator;
+use OCP\IUser;
+use OCP\IUserSession;
+use OCP\SystemTag\ISystemTag;
 use OCP\SystemTag\ISystemTagManager;
 use OCP\SystemTag\ISystemTagObjectMapper;
+use OCP\SystemTag\TagNotFoundException;
 use OCP\WorkflowEngine\IManager;
 use OCP\WorkflowEngine\IRuleMatcher;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -59,6 +64,10 @@ class OperationTest extends TestCase {
 	protected $ruleMatcher;
 	/** @var IMountManager|MockObject */
 	protected $mountManager;
+	/** @var IUserSession|MockObject */
+	protected $userSession;
+	/** @var IGroupManager|MockObject */
+	protected $groupManager;
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -85,6 +94,8 @@ class OperationTest extends TestCase {
 		$this->mountManager = $this->createMock(IMountManager::class);
 		$this->rootFolder = $this->createMock(IRootFolder::class);
 		$this->fileEntity = $this->createMock(\OCA\WorkflowEngine\Entity\File::class);
+		$this->userSession = $this->createMock(IUserSession::class);
+		$this->groupManager = $this->createMock(IGroupManager::class);
 
 		$this->operation = new Operation(
 			$this->objectMapper,
@@ -95,7 +106,9 @@ class OperationTest extends TestCase {
 			$this->urlGenerator,
 			$this->mountManager,
 			$this->rootFolder,
-			$this->fileEntity
+			$this->fileEntity,
+			$this->userSession,
+			$this->groupManager
 		);
 	}
 
@@ -159,6 +172,77 @@ class OperationTest extends TestCase {
 		}
 
 		$this->operation->checkOperations($storage, $fileId, $file);
+	}
+
+	public function dataValidateOperation() {
+		$public = $this->createMock(ISystemTag::class);
+		$public->method('isUserVisible')
+			->willReturn(true);
+		$public->method('isUserAssignable')
+			->willReturn(true);
+		$restricted = $this->createMock(ISystemTag::class);
+		$restricted->method('isUserVisible')
+			->willReturn(true);
+		$restricted->method('isUserAssignable')
+			->willReturn(false);
+		$invisible = $this->createMock(ISystemTag::class);
+		$invisible->method('isUserVisible')
+			->willReturn(false);
+		$invisible->method('isUserAssignable')
+			->willReturn(false);
+
+		return [
+			['', null, false, 1],
+			['1', [$public], false, null],
+			['2,1', [$restricted, $public], false, 4],
+			['1,3', [$public, $invisible], false, 4],
+			['1', [$public], true, null],
+			['2,1', [$restricted, $public], true, null],
+			['1,3', [$public, $invisible], true, null],
+			['4', new TagNotFoundException(), false, 2],
+			['5', new \InvalidArgumentException(), false, 3],
+		];
+	}
+
+	/**
+	 * @dataProvider dataValidateOperation
+	 *
+	 * @param string $operation
+	 * @param ISystemTag[]|\Exception|null $tags
+	 * @param bool $isAdmin
+	 * @param int|null $exceptionCode
+	 */
+	public function testValidateOperation(string $operation, $tags, bool $isAdmin, ?int $exceptionCode) {
+		if ($tags === null) {
+			$this->tagManager->expects($this->never())
+				->method('getTagsByIds');
+		} elseif (is_array($tags)) {
+			$this->tagManager->expects($this->once())
+				->method('getTagsByIds')
+				->willReturn($tags);
+		} else {
+			$this->tagManager->expects($this->once())
+				->method('getTagsByIds')
+				->willThrowException($tags);
+		}
+
+		if ($isAdmin) {
+			$userId = 'admin';
+			$user = $this->createMock(IUser::class);
+			$user->method('getUID')
+				->willReturn($userId);
+			$this->userSession->method('getUser')
+				->willReturn($user);
+			$this->groupManager->method('isAdmin')
+				->with($userId)
+				->willReturn(true);
+		}
+
+		if ($exceptionCode !== null) {
+			$this->expectExceptionCode($exceptionCode);
+		}
+
+		$this->operation->validateOperation('', [], $operation);
 	}
 
 	public function taggingPathDataProvider() {
