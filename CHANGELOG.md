@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 1.15.3 – 2023-03-23
+### Fixed
+* Check tag attribute
+
 ## 1.15.2 – 2023-02-15
 ### Fixed
 * [Allow selecting any tag when many exist (#684)](https://github.com/nextcloud/files_automatedtagging/pull/684)
