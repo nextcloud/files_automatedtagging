@@ -32,8 +32,11 @@ use OCP\Files\Mount\IMountManager;
 use OCP\Files\Node;
 use OCP\Files\Storage\IStorage;
 use OCP\IConfig;
+use OCP\IGroupManager;
 use OCP\IL10N;
 use OCP\IURLGenerator;
+use OCP\IUser;
+use OCP\IUserSession;
 use OCP\SystemTag\ISystemTagManager;
 use OCP\SystemTag\ISystemTagObjectMapper;
 use OCP\SystemTag\TagNotFoundException;
@@ -54,6 +57,10 @@ class Operation implements ISpecificOperation, IComplexOperation {
 	private IMountManager $mountManager;
 	private IRootFolder $rootFolder;
 	private File $fileEntity;
+	/** @var IUserSession */
+	protected $userSession;
+	/** @var IGroupManager */
+	protected $groupManager;
 
 	public function __construct(
 		ISystemTagObjectMapper $objectMapper,
@@ -64,7 +71,9 @@ class Operation implements ISpecificOperation, IComplexOperation {
 		IURLGenerator $urlGenerator,
 		IMountManager $mountManager,
 		IRootFolder $rootFolder,
-		File $fileEntity
+		File $fileEntity,
+		IUserSession $userSession,
+		IGroupManager $groupManager
 	) {
 		$this->objectMapper = $objectMapper;
 		$this->tagManager = $tagManager;
@@ -75,6 +84,8 @@ class Operation implements ISpecificOperation, IComplexOperation {
 		$this->mountManager = $mountManager;
 		$this->rootFolder = $rootFolder;
 		$this->fileEntity = $fileEntity;
+		$this->userSession = $userSession;
+		$this->groupManager = $groupManager;
 	}
 
 	public function checkOperations(IStorage $storage, int $fileId, string $file): void {
@@ -100,16 +111,27 @@ class Operation implements ISpecificOperation, IComplexOperation {
 	 */
 	public function validateOperation(string $name, array $checks, string $operation): void {
 		if ($operation === '') {
-			throw new UnexpectedValueException($this->l->t('No tags given'));
+			throw new UnexpectedValueException($this->l->t('No tags given'), 1);
 		}
 
 		$systemTagIds = explode(',', $operation);
 		try {
-			$this->tagManager->getTagsByIds($systemTagIds);
+			$tags = $this->tagManager->getTagsByIds($systemTagIds);
+
+			$user = $this->userSession->getUser();
+			$isAdmin = $user instanceof IUser && $this->groupManager->isAdmin($user->getUID());
+
+			if (!$isAdmin) {
+				foreach ($tags as $tag) {
+					if (!$tag->isUserAssignable() || !$tag->isUserVisible()) {
+						throw new UnexpectedValueException($this->l->t('At least one of the given tags is invalid'), 4);
+					}
+				}
+			}
 		} catch (TagNotFoundException $e) {
-			throw new UnexpectedValueException($this->l->t('Tag(s) could not be found: %s', implode(', ', $e->getMissingTags())));
+			throw new UnexpectedValueException($this->l->t('At least one of the given tags is invalid'), 2);
 		} catch (InvalidArgumentException $e) {
-			throw new UnexpectedValueException($this->l->t('At least one of the given tags is invalid'));
+			throw new UnexpectedValueException($this->l->t('At least one of the given tags is invalid'), 3);
 		}
 	}
 
@@ -181,7 +203,10 @@ class Operation implements ISpecificOperation, IComplexOperation {
 	}
 
 	public function isAvailableForScope(int $scope): bool {
-		return true;
+		return in_array($scope, [
+			IManager::SCOPE_ADMIN,
+			IManager::SCOPE_USER,
+		], true);
 	}
 
 	public function onEvent(string $eventName, Event $event, IRuleMatcher $ruleMatcher): void {
