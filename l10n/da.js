@@ -2,7 +2,6 @@ OC.L10N.register(
     "files_automatedtagging",
     {
     "No tags given" : "Ingen tags givet",
-    "Tag(s) could not be found: %s" : "Tag(s) kunne ikke blive fundet: %s",
     "At least one of the given tags is invalid" : "Mindst en af de angivne tags er ikke gyldige",
     "Automated tagging" : "Automatisk tagging",
     "Automated tagging of files" : "Automatisk tagging af filer",
@@ -12,6 +11,7 @@ OC.L10N.register(
     "Files automated tagging" : "Filers automatiske tagging",
     "Automatically assign collaborative tags to files based on conditions" : "Tildel automatisk samarbejdsmærker til filer baseret på betingelser",
     "An app for Nextcloud that automatically assigns tags to newly uploaded files based on some conditions.\n\nThe tags can later be used to control retention, file access, automatic script execution and more.\n\n## How it works\nTo define tags, administrators can create and manage a set of rule groups. Each rule group consists of one or more rules combined through operators. Rules can include criteria like file type, size, time and more. A request matches a group if all rules evaluate to true. On uploading a file all defined groups are evaluated and when matching, the given tags are assigned to the file." : "En app til Nextcloud, der automatisk tildeler tags til nyligt uploadede filer baseret på nogle betingelser.\n\nMærkerne kan senere bruges til at kontrollere opbevaring, filadgang, automatisk scriptudførelse og mere.\n\n## Hvordan det virker\nFor at definere tags kan administratorer oprette og administrere et sæt regelgrupper. Hver regelgruppe består af en eller flere regler kombineret via operatorer. Regler kan omfatte kriterier som filtype, størrelse, tid og mere. En anmodning matcher en gruppe, hvis alle regler vurderes til at være sande. Ved upload af en fil evalueres alle definerede grupper, og når de matcher, tildeles de givne tags til filen.",
-    "Tag a file" : "Tag en fil"
+    "Tag a file" : "Tag en fil",
+    "Tag(s) could not be found: %s" : "Tag(s) kunne ikke blive fundet: %s"
 },
 "nplurals=2; plural=(n != 1);");
