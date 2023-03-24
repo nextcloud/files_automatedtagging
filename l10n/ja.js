@@ -11,7 +11,6 @@ OC.L10N.register(
     "Files automated tagging" : "ファイルの自動タグ付け",
     "Automatically assign collaborative tags to files based on conditions" : "条件に基づいて自動的にファイルにコラボタグを割り当てます",
     "An app for Nextcloud that automatically assigns tags to newly uploaded files based on some conditions.\n\nThe tags can later be used to control retention, file access, automatic script execution and more.\n\n## How it works\nTo define tags, administrators can create and manage a set of rule groups. Each rule group consists of one or more rules combined through operators. Rules can include criteria like file type, size, time and more. A request matches a group if all rules evaluate to true. On uploading a file all defined groups are evaluated and when matching, the given tags are assigned to the file." : "新しくアップロードされたファイルに条件に基づいて自動的にタグを割り当てるNextcloudのためのアプリです。\n\nタグは、保存、ファイルアクセス、自動スクリプト実行などを制御するために利用できます。\n\n## 使い方\nタグを定義するために、管理者はルールグループを作成および管理します。各ルールグループは、演算子を用いて組み合わされた1つ以上のルールから構成されます。ルールには、ファイルの種類、サイズ、時間などの基準を含めることができます。 すべてのルールにtrueと評価された場合、リクエストはルールグループに一致します。ファイルをアップロードすると、定義されたすべてのグループが評価され、一致すると、指定されたタグがファイルに割り当てられます。",
-    "Tag a file" : "ファイルにタグ付け",
-    "Tag(s) could not be found: %s" : "タグが見つかりませんでした：%s"
+    "Tag a file" : "ファイルにタグ付け"
 },
 "nplurals=1; plural=0;");
