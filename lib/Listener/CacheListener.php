@@ -23,10 +23,10 @@ declare(strict_types=1);
 
 namespace OCA\FilesAutomatedTagging\Listener;
 
-use OCP\Files\Cache\AbstractCacheEvent;
 use OCA\FilesAutomatedTagging\Operation;
 use OCP\EventDispatcher\Event;
 use OCP\EventDispatcher\IEventListener;
+use OCP\Files\Cache\AbstractCacheEvent;
 
 class CacheListener implements IEventListener {
 	private Operation $operation;
