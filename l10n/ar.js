@@ -1,8 +1,8 @@
 OC.L10N.register(
     "files_automatedtagging",
     {
-    "No tags given" : "لم يتم تعيين أي لاصقاتٍ",
-    "At least one of the given tags is invalid" : "إحدى اللاصقات المُعطاة - على الأقل - غير صالحة",
+    "No tags given" : "لم يتم تعيين أي وسوم",
+    "At least one of the given tags is invalid" : "إحدى الوسوم المُعطاة - على الأقل - غير صالحة",
     "Automated tagging" : "تعيين تلقائي للاصقات",
     "Automated tagging of files" : "تعيين تلقائي للاصقات الملفات",
     "File is changed" : "الملف تغيّر",
