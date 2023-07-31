@@ -68,6 +68,8 @@ class OperationTest extends TestCase {
 	protected $userSession;
 	/** @var IGroupManager|MockObject */
 	protected $groupManager;
+	/** @var IRootFolder|MockObject */
+	protected $rootFolder;
 
 	protected function setUp(): void {
 		parent::setUp();
