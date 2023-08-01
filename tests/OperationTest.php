@@ -64,10 +64,14 @@ class OperationTest extends TestCase {
 	protected $ruleMatcher;
 	/** @var IMountManager|MockObject */
 	protected $mountManager;
+	/** @var \OCA\WorkflowEngine\Entity\File|MockObject */
+	protected $fileEntity;
 	/** @var IUserSession|MockObject */
 	protected $userSession;
 	/** @var IGroupManager|MockObject */
 	protected $groupManager;
+	/** @var IRootFolder|MockObject */
+	protected $rootFolder;
 
 	protected function setUp(): void {
 		parent::setUp();
