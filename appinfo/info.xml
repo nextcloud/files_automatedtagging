@@ -32,7 +32,7 @@ To define tags, administrators can create and manage a set of rule groups. Each 
 	<website>https://github.com/nextcloud/files_automatedtagging</website>
 	<bugs>https://github.com/nextcloud/files_automatedtagging/issues</bugs>
 	<repository>https://github.com/nextcloud/files_automatedtagging.git</repository>
-	<screenshot>https://raw.githubusercontent.com/nextcloud/files_automatedtagging/master/docs/screenshot.png</screenshot>
+	<screenshot>https://raw.githubusercontent.com/nextcloud/files_automatedtagging/main/docs/screenshot.png</screenshot>
 	<dependencies>
 		<nextcloud min-version="28" max-version="28" />
 	</dependencies>
