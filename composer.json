@@ -18,9 +18,8 @@
 		"nextcloud/ocp": "dev-master",
 		"phpunit/phpunit": "^9.6"
 	},
-	"autoload-dev": {
+	"autoload": {
 		"psr-4": {
-			"OCP\\": "vendor/nextcloud/ocp/OCP",
 			"OCA\\FilesAutomatedTagging\\": "lib/"
 		}
 	}
