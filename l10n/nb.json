@@ -1,9 +1,14 @@
 { "translations": {
     "No tags given" : "Ingen merkelapper angitt",
     "At least one of the given tags is invalid" : "Minst én av merkelappene er ugyldige",
+    "Automated tagging" : "Automatisert merking",
+    "Automated tagging of files" : "Automatisert merking av filer",
+    "File is changed" : "Fil er endret",
     "Automatically tag files based on factors such as filetype, user group memberships, time and more." : "Automatisk sett merkelapp på filer basert på faktorer som filtype, medlemskap i brukergruppe, tid og mer.",
     "Each rule group consists of one or more rules. A request matches a group if all rules evaluate to true. On uploading a file all defined groups are evaluated and when matching, the given collaborative tags are assigned to the file." : "Hver regelgruppe består av en eller flere regler. En forespørsel passer en gruppe dersom alle reglene treffer. Ved opplasting av en fil vil alle de definerte gruppene sjekkes og når de passer vil samarbeidsmerkelappene legges til i filen.",
     "Files automated tagging" : "Filenes automatiske merkelapper",
-    "Automatically assign collaborative tags to files based on conditions" : "Tildel automatisk merkelapper til filer basert på forhold"
+    "Automatically assign collaborative tags to files based on conditions" : "Tildel automatisk merkelapper til filer basert på forhold",
+    "An app for Nextcloud that automatically assigns tags to newly uploaded files based on some conditions.\n\nThe tags can later be used to control retention, file access, automatic script execution and more.\n\n## How it works\nTo define tags, administrators can create and manage a set of rule groups. Each rule group consists of one or more rules combined through operators. Rules can include criteria like file type, size, time and more. A request matches a group if all rules evaluate to true. On uploading a file all defined groups are evaluated and when matching, the given tags are assigned to the file." : "En app for Nextcloud som automatisk tildeler merker til nylig opplastede filer basert på noen forhold.\n\nMerkene kan senere brukes til å kontrollere oppbevaring, filtilgang, automatisk skriptkjøring og mer.\n\n## Hvordan det fungerer\nFor å definere merker kan administratorer opprette og administrere et sett med regelgrupper. Hver regelgruppe består av en eller flere regler kombinert gjennom operatører. Regler kan inneholde kriterier som filtype, størrelse, tid og mer. En forespørsel samsvarer med en gruppe hvis alle reglene evalueres til sann. Ved opplasting av en fil evalueres alle definerte grupper, og når de samsvarer, tilordnes de gitte merkene til filen.",
+    "Tag a file" : "Merk en fil"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
 }
