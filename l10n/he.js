@@ -11,4 +11,4 @@ OC.L10N.register(
     "Automatically assign collaborative tags to files based on conditions" : "הקצאת תגים שיתופיים אוטומטית לקבצים בהתאם לתנאים כלשהם",
     "Tag a file" : "תיוג קובץ"
 },
-"nplurals=3; plural=(n == 1 && n % 1 == 0) ? 0 : (n == 2 && n % 1 == 0) ? 1: (n % 10 == 0 && n % 1 == 0 && n > 10) ? 2 : 3;");
+"nplurals=3; plural=(n == 1 && n % 1 == 0) ? 0 : (n == 2 && n % 1 == 0) ? 1: 2;");
