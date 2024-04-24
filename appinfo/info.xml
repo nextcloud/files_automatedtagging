@@ -1,6 +1,10 @@
 <?xml version="1.0"?>
 <info xmlns:xsi= "http://www.w3.org/2001/XMLSchema-instance"
 	  xsi:noNamespaceSchemaLocation="https://apps.nextcloud.com/schema/apps/info.xsd">
+<!--
+SPDX-FileCopyrightText: 2016-2024 Joas Schilling <coding@schilljs.com>
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
 	<id>files_automatedtagging</id>
 	<name>Files automated tagging</name>
 	<summary>Automatically assign collaborative tags to files based on conditions</summary>
