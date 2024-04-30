@@ -8,7 +8,7 @@ Copyright: none
 License: CC0-1.0
 
 Files: l10n/*.js l10n/*.json js/*.js.map js/*.js js/templates/*.handlebars
-Copyright: 2016-2024 Nextcloud contributors
+Copyright: 2016 Nextcloud GmbH and Nextcloud contributors
 License: AGPL-3.0-or-later
 
 Files: img/app.svg

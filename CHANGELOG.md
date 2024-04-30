@@ -1,6 +1,6 @@
 <!--
- ~ SPDX-FileCopyrightText: 2019-2024 Joas Schilling <coding@schilljs.com>
- ~ SPDX-License-Identifier: AGPL-3.0-or-later
+  - SPDX-FileCopyrightText: 2019 Nextcloud GmbH and Nextcloud contributors
+  - SPDX-License-Identifier: AGPL-3.0-or-later
 -->
 # Changelog
 All notable changes to this project will be documented in this file.

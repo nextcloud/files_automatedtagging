@@ -2,10 +2,7 @@
 
 declare(strict_types=1);
 /**
- * @copyright Copyright (c) 2019 Robin Appelman <robin@icewind.nl>
- * @license GNU AGPL version 3 or any later version
- *
- * SPDX-FileCopyrightText: 2019 Robin Appelman <robin@icewind.nl>
+ * SPDX-FileCopyrightText: 2019 Nextcloud GmbH and Nextcloud contributors
  * SPDX-License-Identifier: AGPL-3.0-or-later
  */
 

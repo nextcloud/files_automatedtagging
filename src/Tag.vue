@@ -1,11 +1,7 @@
 <!--
-  - @copyright Copyright (c) 2019 Julius Härtl <jus@bitgrid.net>
-  - @author Julius Härtl <jus@bitgrid.net>
-  - @license GNU AGPL version 3 or any later version
-  -
-  - SPDX-FileCopyrightText: 2019 Julius Härtl <jus@bitgrid.net>
+  - SPDX-FileCopyrightText: 2019 Nextcloud GmbH and Nextcloud contributors
   - SPDX-License-Identifier: AGPL-3.0-or-later
-  -->
+-->
 
 <template>
 	<NcSelectTags :value="integerValue" :multiple="false" @input="emitInput" />
