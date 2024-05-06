@@ -1,5 +1,7 @@
 # Nextcloud Files Automated Tagging App
 
+[![REUSE status](https://api.reuse.software/badge/github.com/nextcloud/files_automatedtagging)](https://api.reuse.software/info/github.com/nextcloud/files_automatedtagging)
+
 An app for Nextcloud that automatically assigns tags to newly uploaded files based on some conditions.
 
 The tags can later be used to control retention, file access, automatic script execution and more.
