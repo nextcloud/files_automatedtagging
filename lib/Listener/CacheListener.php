@@ -13,17 +13,20 @@ use OCP\EventDispatcher\Event;
 use OCP\EventDispatcher\IEventListener;
 use OCP\Files\Cache\AbstractCacheEvent;
 
+/**
+ * @template-implements IEventListener<AbstractCacheEvent>
+ */
 class CacheListener implements IEventListener {
-	private Operation $operation;
-
-	public function __construct(Operation $operation) {
-		$this->operation = $operation;
+	public function __construct(
+		private readonly Operation $operation,
+	) {
 	}
 
 	public function handle(Event $event): void {
 		if (!$event instanceof AbstractCacheEvent) {
 			return;
 		}
+
 		if ($this->operation->isTaggingPath($event->getStorage(), $event->getPath())) {
 			$this->operation->checkOperations($event->getStorage(), $event->getFileId(), $event->getPath());
 		}

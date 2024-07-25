@@ -33,60 +33,42 @@ use PHPUnit\Framework\MockObject\MockObject;
 use Test\TestCase;
 
 class OperationTest extends TestCase {
-	/** @var ISystemTagObjectMapper|MockObject */
-	protected $objectMapper;
-	/** @var ISystemTagManager|MockObject */
-	protected $tagManager;
-	/** @var IManager|MockObject */
-	protected $checkManager;
-	/** @var IL10N|MockObject */
-	protected $l;
-	/** @var IConfig|MockObject */
-	protected $config;
-	/** @var Operation */
-	protected $operation;
-	/** @var IURLGenerator|MockObject */
-	protected $urlGenerator;
-	/** @var IRuleMatcher|MockObject */
-	protected $ruleMatcher;
-	/** @var IMountManager|MockObject */
-	protected $mountManager;
-	/** @var IRootFolder|MockObject */
-	protected $rootFolder;
-	/** @var \OCA\WorkflowEngine\Entity\File|MockObject */
-	protected $fileEntity;
-	/** @var IUserSession|MockObject */
-	protected $userSession;
-	/** @var IGroupManager|MockObject */
-	protected $groupManager;
+	protected ISystemTagObjectMapper&MockObject $objectMapper;
+	protected ISystemTagManager&MockObject $tagManager;
+	protected IManager&MockObject $checkManager;
+	protected IL10N&MockObject $l;
+	protected IConfig&MockObject $config;
+	protected IURLGenerator&MockObject $urlGenerator;
+	protected IRuleMatcher&MockObject $ruleMatcher;
+	protected IMountManager&MockObject $mountManager;
+	protected IRootFolder&MockObject $rootFolder;
+	protected \OCA\WorkflowEngine\Entity\File&MockObject $fileEntity;
+	protected IUserSession&MockObject $userSession;
+	protected IGroupManager&MockObject $groupManager;
+	protected Operation $operation;
 
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->ruleMatcher = $this->createMock(IRuleMatcher::class);
-
 		$this->objectMapper = $this->createMock(ISystemTagObjectMapper::class);
-
 		$this->tagManager = $this->createMock(ISystemTagManager::class);
-
 		$this->checkManager = $this->createMock(IManager::class);
-		$this->checkManager->expects($this->any())
-			->method('getRuleMatcher')
-			->willReturn($this->ruleMatcher);
-
 		$this->l = $this->createMock(IL10N::class);
-
 		$this->config = $this->createMock(IConfig::class);
-		$this->config->method('getSystemValue')
-			->willReturn('instanceid');
-
 		$this->urlGenerator = $this->createMock(IURLGenerator::class);
-
+		$this->ruleMatcher = $this->createMock(IRuleMatcher::class);
 		$this->mountManager = $this->createMock(IMountManager::class);
 		$this->rootFolder = $this->createMock(IRootFolder::class);
 		$this->fileEntity = $this->createMock(\OCA\WorkflowEngine\Entity\File::class);
 		$this->userSession = $this->createMock(IUserSession::class);
 		$this->groupManager = $this->createMock(IGroupManager::class);
+
+		$this->checkManager->expects($this->any())
+			->method('getRuleMatcher')
+			->willReturn($this->ruleMatcher);
+
+		$this->config->method('getSystemValue')
+			->willReturn('instanceid');
 
 		$this->operation = new Operation(
 			$this->objectMapper,
@@ -103,22 +85,18 @@ class OperationTest extends TestCase {
 		);
 	}
 
-	protected function getStorageMock() {
-		return $this->createMock(IStorage::class);
-	}
-
-	public function dataCheckOperations() {
+	public static function dataCheckOperations(): array {
 		return [
-			[$this->getStorageMock(), 123, 'path', [], []],
-			[$this->getStorageMock(), 42, 'path2', [['operation' => '2']], [
-				[2],
+			[123, 'path', [], []],
+			[42, 'path2', [['operation' => '2']], [
+				['2'],
 			]],
-			[$this->getStorageMock(), 23, 'path2', [
+			[23, 'path2', [
 				['operation' => '2,3'],
 				['operation' => '42']
 			], [
-				[2, 3],
-				[42],
+				['2', '3'],
+				['42'],
 			]],
 		];
 	}
@@ -126,13 +104,12 @@ class OperationTest extends TestCase {
 	/**
 	 * @dataProvider dataCheckOperations
 	 *
-	 * @param IStorage $storage
-	 * @param int $fileId
-	 * @param string $file
 	 * @param array[] $matches
 	 * @param array[] $expected
 	 */
-	public function testCheckOperations(IStorage $storage, $fileId, $file, array $matches, array $expected) {
+	public function testCheckOperations(int $fileId, string $file, array $matches, array $expected): void {
+		$storage = $this->createMock(IStorage::class);
+
 		$this->ruleMatcher->expects($this->once())
 			->method('setFileInfo')
 			->with($storage, $file);
@@ -153,34 +130,34 @@ class OperationTest extends TestCase {
 
 		$withConsecutive = [];
 		foreach ($expected as $tags) {
-			$withConsecutive[] = [$fileId, 'files', $tags];
+			$withConsecutive[] = [(string) $fileId, 'files', $tags];
 		}
 
-		foreach ($expected as $key => $tags) {
-			$this->objectMapper->expects($this->any())
-				->method('assignTags')
-				->withConsecutive(...$withConsecutive);
-		}
+		$i = 0;
+		$this->objectMapper->expects($this->exactly(count($withConsecutive)))
+			->method('assignTags')
+			->willReturnCallback(function () use ($withConsecutive, &$i) {
+				$this->assertArrayHasKey($i, $withConsecutive);
+				$this->assertSame($withConsecutive[$i], func_get_args());
+				$i++;
+			});
 
 		$this->operation->checkOperations($storage, $fileId, $file);
 	}
 
-	public function dataValidateOperation() {
+	public function createTagMock(bool $isUserVisible, bool $isUserAssignable): ISystemTag {
 		$public = $this->createMock(ISystemTag::class);
 		$public->method('isUserVisible')
-			->willReturn(true);
+			->willReturn($isUserVisible);
 		$public->method('isUserAssignable')
-			->willReturn(true);
-		$restricted = $this->createMock(ISystemTag::class);
-		$restricted->method('isUserVisible')
-			->willReturn(true);
-		$restricted->method('isUserAssignable')
-			->willReturn(false);
-		$invisible = $this->createMock(ISystemTag::class);
-		$invisible->method('isUserVisible')
-			->willReturn(false);
-		$invisible->method('isUserAssignable')
-			->willReturn(false);
+			->willReturn($isUserAssignable);
+		return $public;
+	}
+
+	public static function dataValidateOperation(): array {
+		$public = ['isUserVisible' => true, 'isUserAssignable' => true];
+		$restricted = ['isUserVisible' => true, 'isUserAssignable' => false];
+		$invisible = ['isUserVisible' => false, 'isUserAssignable' => false];
 
 		return [
 			['', null, false, 1],
@@ -197,20 +174,20 @@ class OperationTest extends TestCase {
 
 	/**
 	 * @dataProvider dataValidateOperation
-	 *
-	 * @param string $operation
-	 * @param ISystemTag[]|\Exception|null $tags
-	 * @param bool $isAdmin
-	 * @param int|null $exceptionCode
 	 */
-	public function testValidateOperation(string $operation, $tags, bool $isAdmin, ?int $exceptionCode) {
+	public function testValidateOperation(string $operation, array|\Throwable|null $tags, bool $isAdmin, ?int $exceptionCode): void {
 		if ($tags === null) {
 			$this->tagManager->expects($this->never())
 				->method('getTagsByIds');
 		} elseif (is_array($tags)) {
+			$return = [];
+			foreach ($tags as $tagData) {
+				$return[] = $this->createTagMock(...$tagData);
+			}
+
 			$this->tagManager->expects($this->once())
 				->method('getTagsByIds')
-				->willReturn($tags);
+				->willReturn($return);
 		} else {
 			$this->tagManager->expects($this->once())
 				->method('getTagsByIds')
@@ -236,7 +213,7 @@ class OperationTest extends TestCase {
 		$this->operation->validateOperation('', [], $operation);
 	}
 
-	public function taggingPathDataProvider() {
+	public static function dataIsTaggingPath(): array {
 		$homeId = 'home::alice';
 		$localId = 'local::/mnt/users/alice';
 		$smbId = 'smb::alice@ser.vr/share/thing';
@@ -261,18 +238,15 @@ class OperationTest extends TestCase {
 	}
 
 	/**
-	 * @dataProvider taggingPathDataProvider
-	 * @param string $storageClass
-	 * @param string $path
-	 * @param bool $expected
+	 * @dataProvider dataIsTaggingPath
 	 */
-	public function testIsTaggingPath(string $storageClass, string $storageId, string $path, bool $expected, string $mountPointPath = '') {
+	public function testIsTaggingPath(string $storageClass, string $storageId, string $path, bool $expected, string $mountPointPath = ''): void {
 		$isLocal = $storageClass === Home::class || $storageClass === Local::class;
 
-		/** @var IStorage|MockObject $storage */
+		/** @var IStorage&MockObject $storage */
 		$storage = $this->getMockBuilder($storageClass)
 			->disableOriginalConstructor()
-			->setMethodsExcept(['instanceOfStorage'])
+			->onlyMethods(['getId', 'isLocal'])
 			->getMock();
 
 		$storage->expects($this->any())

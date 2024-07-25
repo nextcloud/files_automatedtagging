@@ -14,21 +14,22 @@ use OCP\EventDispatcher\Event;
 use OCP\EventDispatcher\IEventListener;
 use OCP\Util;
 use OCP\WorkflowEngine\Events\RegisterOperationsEvent;
-use Psr\Container\ContainerInterface;
 
+/**
+ * @template-implements IEventListener<RegisterOperationsEvent>
+ */
 class RegisterFlowOperationsListener implements IEventListener {
-	private ContainerInterface $container;
-
-	public function __construct(ContainerInterface $container) {
-		$this->container = $container;
+	public function __construct(
+		private readonly Operation $operation,
+	) {
 	}
 
 	public function handle(Event $event): void {
 		if (!$event instanceof RegisterOperationsEvent) {
 			return;
 		}
-		$operation = $this->container->get(Operation::class);
-		$event->registerOperation($operation);
+
+		$event->registerOperation($this->operation);
 		Util::addScript(Application::APPID, 'files_automatedtagging-main');
 	}
 }

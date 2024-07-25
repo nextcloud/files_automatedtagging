@@ -35,44 +35,19 @@ use RuntimeException;
 use UnexpectedValueException;
 
 class Operation implements ISpecificOperation, IComplexOperation {
-	protected ISystemTagObjectMapper $objectMapper;
-	protected ISystemTagManager $tagManager;
-	protected IManager $checkManager;
-	protected IL10N $l;
-	private IConfig $config;
-	private IURLGenerator $urlGenerator;
-	private IMountManager $mountManager;
-	private IRootFolder $rootFolder;
-	private File $fileEntity;
-	/** @var IUserSession */
-	protected $userSession;
-	/** @var IGroupManager */
-	protected $groupManager;
-
 	public function __construct(
-		ISystemTagObjectMapper $objectMapper,
-		ISystemTagManager $tagManager,
-		IManager $checkManager,
-		IL10N $l,
-		IConfig $config,
-		IURLGenerator $urlGenerator,
-		IMountManager $mountManager,
-		IRootFolder $rootFolder,
-		File $fileEntity,
-		IUserSession $userSession,
-		IGroupManager $groupManager
+		protected readonly ISystemTagObjectMapper $objectMapper,
+		protected readonly ISystemTagManager $tagManager,
+		protected readonly IManager $checkManager,
+		protected readonly IL10N $l,
+		protected readonly IConfig $config,
+		protected readonly IURLGenerator $urlGenerator,
+		protected readonly IMountManager $mountManager,
+		protected readonly IRootFolder $rootFolder,
+		protected readonly File $fileEntity,
+		protected readonly IUserSession $userSession,
+		protected readonly IGroupManager $groupManager
 	) {
-		$this->objectMapper = $objectMapper;
-		$this->tagManager = $tagManager;
-		$this->checkManager = $checkManager;
-		$this->l = $l;
-		$this->config = $config;
-		$this->urlGenerator = $urlGenerator;
-		$this->mountManager = $mountManager;
-		$this->rootFolder = $rootFolder;
-		$this->fileEntity = $fileEntity;
-		$this->userSession = $userSession;
-		$this->groupManager = $groupManager;
 	}
 
 	public function checkOperations(IStorage $storage, int $fileId, string $file): void {
@@ -115,9 +90,9 @@ class Operation implements ISpecificOperation, IComplexOperation {
 					}
 				}
 			}
-		} catch (TagNotFoundException $e) {
+		} catch (TagNotFoundException) {
 			throw new UnexpectedValueException($this->l->t('At least one of the given tags is invalid'), 2);
-		} catch (InvalidArgumentException $e) {
+		} catch (InvalidArgumentException) {
 			throw new UnexpectedValueException($this->l->t('At least one of the given tags is invalid'), 3);
 		}
 	}
