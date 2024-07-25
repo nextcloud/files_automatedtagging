@@ -60,6 +60,7 @@ appstore: clean build
 	--exclude=/package.json \
 	--exclude=/.php-cs-fixer.cache \
 	--exclude=/.php-cs-fixer.dist.php \
+	--exclude=/psalm.xml \
 	--exclude=/stylelint.config.js \
 	--exclude=/translationfiles \
 	--exclude=/.tx \
