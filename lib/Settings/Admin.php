@@ -14,12 +14,10 @@ use OCP\Settings\ISettings;
 use OCP\Util;
 
 class Admin implements ISettings {
-	private IL10N $l10n;
-	private string $appName;
-
-	public function __construct(string $appName, IL10N $l) {
-		$this->appName = $appName;
-		$this->l10n = $l;
+	public function __construct(
+		private readonly string $appName,
+		private readonly IL10N $l10n,
+	) {
 	}
 
 	public function getForm(): TemplateResponse {
