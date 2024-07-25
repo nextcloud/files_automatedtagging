@@ -13,6 +13,9 @@ use OCP\EventDispatcher\Event;
 use OCP\EventDispatcher\IEventListener;
 use OCP\Files\Cache\AbstractCacheEvent;
 
+/**
+ * @template-implements IEventListener<AbstractCacheEvent>
+ */
 class CacheListener implements IEventListener {
 	public function __construct(
 		private readonly Operation $operation,

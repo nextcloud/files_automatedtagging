@@ -15,6 +15,9 @@ use OCP\EventDispatcher\IEventListener;
 use OCP\Util;
 use OCP\WorkflowEngine\Events\RegisterOperationsEvent;
 
+/**
+ * @template-implements IEventListener<RegisterOperationsEvent>
+ */
 class RegisterFlowOperationsListener implements IEventListener {
 	public function __construct(
 		private readonly Operation $operation,
