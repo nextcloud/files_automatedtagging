@@ -9,14 +9,14 @@
 		"optimize-autoloader": true,
 		"classmap-authoritative": true,
 		"platform": {
-			"php": "8.0"
+			"php": "8.1"
 		},
 		"sort-packages": true
 	},
 	"require-dev": {
-		"nextcloud/coding-standard": "^1.1",
+		"nextcloud/coding-standard": "^1.2.1",
 		"nextcloud/ocp": "dev-master",
-		"phpunit/phpunit": "^9.6"
+		"phpunit/phpunit": "^10.5.28"
 	},
 	"autoload": {
 		"psr-4": {

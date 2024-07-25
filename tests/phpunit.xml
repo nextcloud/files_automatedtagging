@@ -1,20 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<phpunit bootstrap="bootstrap.php"
-		 verbose="true"
-		 convertDeprecationsToExceptions="true"
-		 timeoutForSmallTests="900"
-		 timeoutForMediumTests="900"
-		 timeoutForLargeTests="900">
-	<coverage>
-		<include>
-			<directory suffix=".php">../../files_automatedtagging/appinfo</directory>
-			<directory suffix=".php">../../files_automatedtagging/lib</directory>
-		</include>
-		<report>
-			<clover outputFile="./clover.xml"/>
-		</report>
-	</coverage>
-	<testsuite name="Files Automated Tagging Tests">
-		<directory suffix="Test.php">.</directory>
-	</testsuite>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" bootstrap="bootstrap.php" timeoutForSmallTests="900" timeoutForMediumTests="900" timeoutForLargeTests="900" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.5/phpunit.xsd" cacheDirectory=".phpunit.cache">
+  <testsuite name="Files Automated Tagging Tests">
+    <directory suffix="Test.php">.</directory>
+  </testsuite>
+  <source>
+    <include>
+      <directory suffix=".php">../../files_automatedtagging/appinfo</directory>
+      <directory suffix=".php">../../files_automatedtagging/lib</directory>
+    </include>
+  </source>
 </phpunit>
