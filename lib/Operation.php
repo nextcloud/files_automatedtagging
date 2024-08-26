@@ -64,7 +64,7 @@ class Operation implements ISpecificOperation, IComplexOperation {
 		$matches = $matcher->getFlows(false);
 
 		foreach ($matches as $match) {
-			$this->objectMapper->assignTags((string) $fileId, 'files', explode(',', $match['operation']));
+			$this->objectMapper->assignTags((string)$fileId, 'files', explode(',', $match['operation']));
 		}
 	}
 
