@@ -130,7 +130,7 @@ class OperationTest extends TestCase {
 
 		$withConsecutive = [];
 		foreach ($expected as $tags) {
-			$withConsecutive[] = [(string) $fileId, 'files', $tags];
+			$withConsecutive[] = [(string)$fileId, 'files', $tags];
 		}
 
 		$i = 0;
