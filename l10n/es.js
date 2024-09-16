@@ -1,8 +1,8 @@
 OC.L10N.register(
     "files_automatedtagging",
     {
-    "No tags given" : "No se han puesto etiquetas",
-    "At least one of the given tags is invalid" : "Al menos una de las etiquetas otorgadas es inválida",
+    "No tags given" : "No se han proporcionado etiquetas",
+    "At least one of the given tags is invalid" : "Al menos una de las etiquetas proporcionadas es inválida",
     "Automated tagging" : "Etiquetado automático",
     "Automated tagging of files" : "Etiquetado automatizado de archivos",
     "File is changed" : "El archivo ha cambiado",
