@@ -46,7 +46,7 @@ class Operation implements ISpecificOperation, IComplexOperation {
 		protected readonly IRootFolder $rootFolder,
 		protected readonly File $fileEntity,
 		protected readonly IUserSession $userSession,
-		protected readonly IGroupManager $groupManager
+		protected readonly IGroupManager $groupManager,
 	) {
 	}
 
