@@ -25,6 +25,7 @@ class Application extends App implements IBootstrap {
 		parent::__construct(self::APPID);
 	}
 
+	#[\Override]
 	public function register(IRegistrationContext $context): void {
 		$context->registerEventListener(CacheEntryInsertedEvent::class, CacheListener::class);
 		$context->registerEventListener(CacheEntryUpdatedEvent::class, CacheListener::class);
@@ -32,6 +33,7 @@ class Application extends App implements IBootstrap {
 		$context->registerEventListener(RegisterOperationsEvent::class, RegisterFlowOperationsListener::class);
 	}
 
+	#[\Override]
 	public function boot(IBootContext $context): void {
 	}
 }
