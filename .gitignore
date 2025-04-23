@@ -62,3 +62,4 @@ node_modules
 # packaging
 /build/
 /vendor/
+/vendor-bin/*/vendor/

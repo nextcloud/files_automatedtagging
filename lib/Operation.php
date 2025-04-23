@@ -71,6 +71,7 @@ class Operation implements ISpecificOperation, IComplexOperation {
 	/**
 	 * @throws UnexpectedValueException
 	 */
+	#[\Override]
 	public function validateOperation(string $name, array $checks, string $operation): void {
 		if ($operation === '') {
 			throw new UnexpectedValueException($this->l->t('No tags given'), 1);
@@ -152,18 +153,22 @@ class Operation implements ISpecificOperation, IComplexOperation {
 		return 'appdata_' . $instanceId;
 	}
 
+	#[\Override]
 	public function getDisplayName(): string {
 		return $this->l->t('Automated tagging');
 	}
 
+	#[\Override]
 	public function getDescription(): string {
 		return $this->l->t('Automated tagging of files');
 	}
 
+	#[\Override]
 	public function getIcon(): string {
 		return $this->urlGenerator->imagePath(Application::APPID, 'app.svg');
 	}
 
+	#[\Override]
 	public function isAvailableForScope(int $scope): bool {
 		return in_array($scope, [
 			IManager::SCOPE_ADMIN,
@@ -171,14 +176,17 @@ class Operation implements ISpecificOperation, IComplexOperation {
 		], true);
 	}
 
+	#[\Override]
 	public function onEvent(string $eventName, Event $event, IRuleMatcher $ruleMatcher): void {
 		// Assigning tags is handled though the cache listener
 	}
 
+	#[\Override]
 	public function getEntityId(): string {
 		return File::class;
 	}
 
+	#[\Override]
 	public function getTriggerHint(): string {
 		return $this->l->t('File is changed');
 	}
