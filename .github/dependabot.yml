@@ -22,3 +22,19 @@ updates:
   labels:
   - 3. to review
   - dependencies
+
+# Composer: Tooling
+- package-ecosystem: composer
+  directories:
+    - "/vendor-bin/phpunit"
+    - "/vendor-bin/psalm"
+  commit-message:
+    prefix: "ci"
+    include: "scope"
+  versioning-strategy: "increase"
+  schedule:
+    interval: weekly
+    day: saturday
+    time: "03:30"
+    timezone: Europe/Berlin
+

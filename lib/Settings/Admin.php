@@ -20,6 +20,7 @@ class Admin implements ISettings {
 	) {
 	}
 
+	#[\Override]
 	public function getForm(): TemplateResponse {
 		Util::addScript($this->appName, 'admin');
 		$parameters = [
@@ -33,10 +34,12 @@ class Admin implements ISettings {
 		return new TemplateResponse('workflowengine', 'admin', $parameters, 'blank');
 	}
 
+	#[\Override]
 	public function getSection(): string {
 		return 'workflow';
 	}
 
+	#[\Override]
 	public function getPriority(): int {
 		return 75;
 	}
