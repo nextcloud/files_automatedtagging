@@ -3,7 +3,12 @@ OC.L10N.register(
     {
     "No tags given" : "Silte pole määratud",
     "At least one of the given tags is invalid" : "Vähemalt üks antud märgend on vigane",
+    "Automated tagging" : "Automaatne sildistamine",
+    "Automated tagging of files" : "Failide automaatne sildistamine",
+    "File is changed" : "Fail on muutunud",
     "Automatically tag files based on factors such as filetype, user group memberships, time and more." : "Autmaatselt sildista faile faktorite nagu tailitüüp, kasutajagurpp, aeg jne",
-    "Files automated tagging" : "Failide automaatne sildistamine"
+    "Files automated tagging" : "Failide automaatne sildistamine",
+    "Automatically assign collaborative tags to files based on conditions" : "Lisa failidele automaatselt ühistööpõhiseid silte konkreetsete tingimuste alusel",
+    "Tag a file" : "Sildista faili"
 },
 "nplurals=2; plural=(n != 1);");
