@@ -27,7 +27,6 @@ use OCP\AppFramework\App;
 use OCP\AppFramework\Bootstrap\IBootContext;
 use OCP\AppFramework\Bootstrap\IBootstrap;
 use OCP\AppFramework\Bootstrap\IRegistrationContext;
-use OCP\Files\Cache\CacheEntryInsertedEvent;
 use OCP\Files\Cache\CacheEntryUpdatedEvent;
 use OCP\WorkflowEngine\Events\RegisterOperationsEvent;
 
@@ -39,7 +38,6 @@ class Application extends App implements IBootstrap {
 	}
 
 	public function register(IRegistrationContext $context): void {
-		$context->registerEventListener(CacheEntryInsertedEvent::class, CacheListener::class);
 		$context->registerEventListener(CacheEntryUpdatedEvent::class, CacheListener::class);
 
 		$context->registerEventListener(RegisterOperationsEvent::class, RegisterFlowOperationsListener::class);

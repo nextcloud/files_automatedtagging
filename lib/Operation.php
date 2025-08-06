@@ -44,6 +44,7 @@ use OCP\WorkflowEngine\IComplexOperation;
 use OCP\WorkflowEngine\IManager;
 use OCP\WorkflowEngine\IRuleMatcher;
 use OCP\WorkflowEngine\ISpecificOperation;
+use Psr\Log\LoggerInterface;
 use RuntimeException;
 use UnexpectedValueException;
 
