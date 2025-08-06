@@ -31,10 +31,13 @@ use OCP\WorkflowEngine\IComplexOperation;
 use OCP\WorkflowEngine\IManager;
 use OCP\WorkflowEngine\IRuleMatcher;
 use OCP\WorkflowEngine\ISpecificOperation;
+use Psr\Log\LoggerInterface;
 use RuntimeException;
 use UnexpectedValueException;
 
 class Operation implements ISpecificOperation, IComplexOperation {
+	protected array $issuedTagNotFoundWarnings = [];
+
 	public function __construct(
 		protected readonly ISystemTagObjectMapper $objectMapper,
 		protected readonly ISystemTagManager $tagManager,
@@ -47,6 +50,7 @@ class Operation implements ISpecificOperation, IComplexOperation {
 		protected readonly File $fileEntity,
 		protected readonly IUserSession $userSession,
 		protected readonly IGroupManager $groupManager,
+		protected readonly LoggerInterface $logger,
 	) {
 	}
 
@@ -64,7 +68,19 @@ class Operation implements ISpecificOperation, IComplexOperation {
 		$matches = $matcher->getFlows(false);
 
 		foreach ($matches as $match) {
-			$this->objectMapper->assignTags((string)$fileId, 'files', explode(',', $match['operation']));
+			try {
+				$this->objectMapper->assignTags((string)$fileId, 'files', explode(',', $match['operation']));
+			} catch (TagNotFoundException $e) {
+				$msg = sprintf('The tag to assign (ID %s) cannot be found anymore. The related rule is %s.',
+					$match['operation'],
+					$match['scope_type'] === 0 ? 'global' : 'owned by ' . $match['scope_actor_id']
+				);
+				if (isset($this->issuedTagNotFoundWarnings[md5($msg)])) {
+					continue;
+				}
+				$this->issuedTagNotFoundWarnings[md5($msg)] = true;
+				$this->logger->error($msg);
+			}
 		}
 	}
 
