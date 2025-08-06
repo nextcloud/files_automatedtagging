@@ -30,6 +30,7 @@ use OCP\SystemTag\TagNotFoundException;
 use OCP\WorkflowEngine\IManager;
 use OCP\WorkflowEngine\IRuleMatcher;
 use PHPUnit\Framework\MockObject\MockObject;
+use Psr\Log\LoggerInterface;
 use Test\TestCase;
 
 class OperationTest extends TestCase {
@@ -45,6 +46,7 @@ class OperationTest extends TestCase {
 	protected \OCA\WorkflowEngine\Entity\File&MockObject $fileEntity;
 	protected IUserSession&MockObject $userSession;
 	protected IGroupManager&MockObject $groupManager;
+	protected LoggerInterface&MockObject $logger;
 	protected Operation $operation;
 
 	protected function setUp(): void {
@@ -62,6 +64,7 @@ class OperationTest extends TestCase {
 		$this->fileEntity = $this->createMock(\OCA\WorkflowEngine\Entity\File::class);
 		$this->userSession = $this->createMock(IUserSession::class);
 		$this->groupManager = $this->createMock(IGroupManager::class);
+		$this->logger = $this->createMock(LoggerInterface::class);
 
 		$this->checkManager->expects($this->any())
 			->method('getRuleMatcher')
@@ -81,7 +84,8 @@ class OperationTest extends TestCase {
 			$this->rootFolder,
 			$this->fileEntity,
 			$this->userSession,
-			$this->groupManager
+			$this->groupManager,
+			$this->logger,
 		);
 	}
 
