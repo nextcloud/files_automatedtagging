@@ -4,7 +4,7 @@
 -->
 
 <template>
-	<NcSelectTags :value="integerValue" :multiple="false" @input="emitInput" />
+	<NcSelectTags v-model="integerValue" :multiple="false" @input="emitInput" />
 </template>
 
 <script>
@@ -14,19 +14,21 @@ export default {
 	name: 'Tag',
 	components: { NcSelectTags },
 	props: {
-		value: {
+		modelValue: {
 			type: String,
 			default: '',
 		},
 	},
+	emits: ['update:model-value'],
 	computed: {
 		integerValue() {
-			return parseInt(this.value)
+			const val = parseInt(this.modelValue)
+			return isNaN(val) ? -1 : val
 		},
 	},
 	methods: {
 		emitInput(value) {
-			this.$emit('input', '' + value)
+			this.$emit('update:model-value', '' + value)
 		},
 	},
 }
