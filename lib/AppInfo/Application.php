@@ -27,7 +27,6 @@ class Application extends App implements IBootstrap {
 
 	#[\Override]
 	public function register(IRegistrationContext $context): void {
-		$context->registerEventListener(CacheEntryInsertedEvent::class, CacheListener::class);
 		$context->registerEventListener(CacheEntryUpdatedEvent::class, CacheListener::class);
 
 		$context->registerEventListener(RegisterOperationsEvent::class, RegisterFlowOperationsListener::class);
