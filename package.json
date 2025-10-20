@@ -39,6 +39,7 @@
     "@nextcloud/eslint-config": "^8.4.2",
     "@nextcloud/stylelint-config": "^3.1.1",
     "@nextcloud/webpack-vue-config": "^6.3.0",
+    "browserslist": "^4.26.3",
     "vue-template-compiler": "^2.7.16"
   }
 }
