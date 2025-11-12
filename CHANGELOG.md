@@ -5,6 +5,12 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 2.0.1 - 2025-11-12
+### Fixed
+* [Fix: adjust to workflowengine changes and register web component (files_automatedtagging#1213)](https://github.com/nextcloud/files_automatedtagging/pull/1213)
+* [Fix: error on upload when a tag is not found anymore (files_automatedtagging#1279)](https://github.com/nextcloud/files_automatedtagging/pull/1279)
+* [Fix\(UI\): Uncaught TypeError: can't access property "catalogs", Ml.gt … (files_automatedtagging#1281)](https://github.com/nextcloud/files_automatedtagging/pull/1281)
+
 ## 2.0.0 – 2025-01-09
 ### Changed
 - Require Nextcloud 31
