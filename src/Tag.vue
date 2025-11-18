@@ -4,11 +4,11 @@
 -->
 
 <template>
-	<NcSelectTags v-model="integerValue" :multiple="false" @input="emitInput" />
+	<NcSelectTags v-model="integerValue" :multiple="false" @update:model-value="emitInput" />
 </template>
 
 <script>
-import NcSelectTags from '@nextcloud/vue/dist/Components/NcSelectTags.js'
+import NcSelectTags from '@nextcloud/vue/components/NcSelectTags'
 
 export default {
 	name: 'Tag',
@@ -19,7 +19,7 @@ export default {
 			default: '',
 		},
 	},
-	emits: ['update:model-value'],
+	emits: ['update:modelValue'],
 	computed: {
 		integerValue() {
 			const val = parseInt(this.modelValue)
@@ -28,7 +28,7 @@ export default {
 	},
 	methods: {
 		emitInput(value) {
-			this.$emit('update:model-value', '' + value)
+			this.$emit('update:modelValue', '' + value)
 		},
 	},
 }
