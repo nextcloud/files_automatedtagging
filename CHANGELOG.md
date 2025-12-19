@@ -5,9 +5,13 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 1.20.2 - 2025-12-19
+### Fixed
+* [Fix: listen to CacheEntryInsertedEvent again (#1319)](https://github.com/nextcloud/files_automatedtagging/pull/1319)
+
 ## 1.20.1 - 2025-11-12
 ### Fixed
-* [Fix: error on upload when a tag is not found anymore (files_automatedtagging#1278)](https://github.com/nextcloud/files_automatedtagging/pull/1278)
+* [Fix: error on upload when a tag is not found anymore (#1278)](https://github.com/nextcloud/files_automatedtagging/pull/1278)
 
 ## 1.20.0 – 2024-07-25
 ### Changed
