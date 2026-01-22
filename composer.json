@@ -25,7 +25,7 @@
 	},
 	"require-dev": {
 		"nextcloud/coding-standard": "^1.2.1",
-		"nextcloud/ocp": "dev-master"
+		"nextcloud/ocp": "dev-stable33"
 	},
 	"autoload": {
 		"psr-4": {
