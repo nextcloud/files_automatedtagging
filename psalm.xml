@@ -27,6 +27,7 @@
 		<UndefinedClass>
 			<errorLevel type="suppress">
 				<referencedClass name="OCA\GroupFolders\Mount\GroupFolderStorage" />
+				<referencedClass name="OCA\GroupFolders\Mount\GroupMountPoint" />
 				<referencedClass name="OCA\WorkflowEngine\Entity\File" />
 			</errorLevel>
 		</UndefinedClass>

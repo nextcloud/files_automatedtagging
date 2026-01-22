@@ -5,13 +5,17 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 3.0.3 - 2026-01-22
+### Fixed
+* [fix: Trigger tagging for per-folder storage groupfolders (#1349)](https://github.com/nextcloud/files_automatedtagging/pull/1349)
+
 ## 3.0.2 - 2025-12-19
 ### Fixed
-* [Fix: listen to CacheEntryInsertedEvent again (#1321)](https://github.com/nextcloud/files_automatedtagging/pull/1321)
+* [fix: listen to CacheEntryInsertedEvent again (#1321)](https://github.com/nextcloud/files_automatedtagging/pull/1321)
 
 ## 3.0.1 - 2025-11-12
 ### Fixed
-* [Fix: error on upload when a tag is not found anymore (#1276)](https://github.com/nextcloud/files_automatedtagging/pull/1276)
+* [fix: error on upload when a tag is not found anymore (#1276)](https://github.com/nextcloud/files_automatedtagging/pull/1276)
 
 ## 3.0.0 – 2025-09-26
 ### Changed
