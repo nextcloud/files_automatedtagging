@@ -11,6 +11,7 @@ namespace OCA\FilesAutomatedTagging;
 use InvalidArgumentException;
 use OCA\FilesAutomatedTagging\AppInfo\Application;
 use OCA\GroupFolders\Mount\GroupFolderStorage;
+use OCA\GroupFolders\Mount\GroupMountPoint;
 use OCA\WorkflowEngine\Entity\File;
 use OCP\EventDispatcher\Event;
 use OCP\Files\IHomeStorage;
@@ -126,19 +127,25 @@ class Operation implements ISpecificOperation, IComplexOperation {
 
 		if (!$storage->isLocal() || strpos($storage->getId(), 'local::') === 0) {
 			$mountPoints = $this->mountManager->findByStorageId($storage->getId());
-			if (!empty($mountPoints) && $mountPoints[0]->getMountType() === 'external') {
-				// it is OK to only look at the first one, if there are many
-				if (!empty($file)) {
-					// a file somewhere on the storage is always OK
-					return true;
+			if ($mountPoints !== []) {
+				if ($mountPoints[0]->getMountType() === 'external') {
+					// it is OK to only look at the first one, if there are many
+					if (!empty($file)) {
+						// a file somewhere on the storage is always OK
+						return true;
+					}
+
+					// external storages are always ok as long as not mounted as user root
+					$mountPointPath = rtrim($mountPoints[0]->getMountPoint(), '/');
+					$mountPointPieces = explode('/', $mountPointPath);
+					$mountPointName = array_pop($mountPointPieces);
+					// user root structure: /$USER_ID/files
+					return ($mountPointName !== 'files' || count($mountPointPieces) !== 2);
 				}
 
-				// external storages are always ok as long as not mounted as user root
-				$mountPointPath = rtrim($mountPoints[0]->getMountPoint(), '/');
-				$mountPointPieces = explode('/', $mountPointPath);
-				$mountPointName = array_pop($mountPointPieces);
-				// user root structure: /$USER_ID/files
-				return ($mountPointName !== 'files' || count($mountPointPieces) !== 2);
+				if ($mountPoints[0] instanceof GroupMountPoint) {
+					return true;
+				}
 			}
 		}
 
