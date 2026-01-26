@@ -1,9 +1,16 @@
 OC.L10N.register(
     "files_automatedtagging",
     {
-    "No tags given" : "Tidak ada tag diberikan",
-    "At least one of the given tags is invalid" : "Sedikitnya satu dari tag yang diberikan tidak sah",
-    "Each rule group consists of one or more rules. A request matches a group if all rules evaluate to true. On uploading a file all defined groups are evaluated and when matching, the given collaborative tags are assigned to the file." : "Setiap kelompok aturan terdiri dari satu atau lebih aturan. Permintaan cocok dengan kelompok jika semua aturan terevaluasi benar. Pada pengunggahan berkas semua kelompok terdefinisi dievaluasi dan ketika cocok, tag kolaboratif diberikan ke berkas.",
-    "Files automated tagging" : "Tag otomatis berkas"
+    "No tags given" : "Tidak ada tag yang diberikan",
+    "At least one of the given tags is invalid" : "Setidaknya satu tag yang diberikan tidak valid",
+    "Automated tagging" : "Pemberian tag otomatis",
+    "Automated tagging of files" : "Pemberian tag otomatis pada file",
+    "File is changed" : "File diubah",
+    "Automatically tag files based on factors such as filetype, user group memberships, time and more." : "Beri tag file secara otomatis berdasarkan faktor seperti jenis file, keanggotaan grup pengguna, waktu, dan lainnya.",
+    "Each rule group consists of one or more rules. A request matches a group if all rules evaluate to true. On uploading a file all defined groups are evaluated and when matching, the given collaborative tags are assigned to the file." : "Setiap grup aturan terdiri dari satu atau lebih aturan. Sebuah permintaan cocok dengan suatu grup jika semua aturan dievaluasi bernilai benar. Saat mengunggah file, semua grup yang didefinisikan akan dievaluasi dan jika cocok, tag kolaboratif yang diberikan akan ditetapkan ke file.",
+    "Files automated tagging" : "Pemberian tag otomatis pada file",
+    "Automatically assign collaborative tags to files based on conditions" : "Tetapkan tag kolaboratif ke file secara otomatis berdasarkan kondisi",
+    "An app for Nextcloud that automatically assigns tags to newly uploaded files based on some conditions.\n\nThe tags can later be used to control retention, file access, automatic script execution and more.\n\n## How it works\nTo define tags, administrators can create and manage a set of rule groups. Each rule group consists of one or more rules combined through operators. Rules can include criteria like file type, size, time and more. A request matches a group if all rules evaluate to true. On uploading a file all defined groups are evaluated and when matching, the given tags are assigned to the file." : "Aplikasi untuk Nextcloud yang secara otomatis menetapkan tag pada file yang baru diunggah berdasarkan beberapa kondisi.\n\nTag tersebut nantinya dapat digunakan untuk mengendalikan retensi, akses file, eksekusi skrip otomatis, dan lainnya.\n\n## Cara kerjanya\nUntuk mendefinisikan tag, administrator dapat membuat dan mengelola serangkaian grup aturan. Setiap grup aturan terdiri dari satu atau lebih aturan yang dikombinasikan melalui operator. Aturan dapat mencakup kriteria seperti jenis file, ukuran, waktu, dan lainnya. Sebuah permintaan cocok dengan suatu grup jika semua aturan dievaluasi bernilai benar. Saat mengunggah file, semua grup yang didefinisikan akan dievaluasi dan jika cocok, tag yang diberikan akan ditetapkan ke file.",
+    "Tag a file" : "Beri tag pada file"
 },
 "nplurals=1; plural=0;");
