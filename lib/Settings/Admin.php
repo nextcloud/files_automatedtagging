@@ -31,7 +31,7 @@ class Admin implements ISettings {
 			'description' => $this->l10n->t('Each rule group consists of one or more rules. A request matches a group if all rules evaluate to true. On uploading a file all defined groups are evaluated and when matching, the given collaborative tags are assigned to the file.'),
 		];
 
-		return new TemplateResponse('workflowengine', 'admin', $parameters, 'blank');
+		return new TemplateResponse('workflowengine', 'admin', $parameters, TemplateResponse::RENDER_AS_BLANK);
 	}
 
 	#[\Override]
