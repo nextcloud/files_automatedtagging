@@ -58,8 +58,7 @@ class Operation implements ISpecificOperation, IComplexOperation {
 	public function checkOperations(IStorage $storage, int $fileId, string $file): void {
 		$matcher = $this->checkManager->getRuleMatcher();
 		$matcher->setFileInfo($storage, $file);
-		$nodes = $this->rootFolder->getById($fileId);
-		$node = current($nodes);
+		$node = $this->rootFolder->getFirstNodeById($fileId);
 		if ($node instanceof Node) {
 			$matcher->setEntitySubject($this->fileEntity, $node);
 		}
