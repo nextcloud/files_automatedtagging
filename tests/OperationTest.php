@@ -128,9 +128,9 @@ class OperationTest extends TestCase {
 			->willReturn($matches);
 		$node = $this->createMock(File::class);
 		$this->rootFolder->expects($this->once())
-			->method('getById')
+			->method('getFirstNodeById')
 			->with($fileId)
-			->willReturn([$node]);
+			->willReturn($node);
 
 		$withConsecutive = [];
 		foreach ($expected as $tags) {
