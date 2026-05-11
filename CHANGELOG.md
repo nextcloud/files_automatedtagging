@@ -5,6 +5,21 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 5.0.0 – 2026-05-11
+### Changed
+- Require Nextcloud 34
+- Update translations
+- Update dependencies
+
+## 4.0.0 – 2026-01-22
+### Changed
+- Require Nextcloud 33
+- Update translations
+- Update dependencies
+
+### Fixed
+- fix: Trigger tagging for per-folder storage groupfolders [#1346](https://github.com/nextcloud/files_automatedtagging/pull/1346)
+
 ## 3.0.0 – 2025-09-26
 ### Changed
 - Require Nextcloud 32
