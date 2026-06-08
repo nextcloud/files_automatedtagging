@@ -64,7 +64,6 @@ class Operation implements ISpecificOperation, IComplexOperation {
 		}
 		$matcher->setOperation($this);
 
-
 		$matches = $matcher->getFlows(false);
 
 		foreach ($matches as $match) {
