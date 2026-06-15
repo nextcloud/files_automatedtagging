@@ -29,6 +29,7 @@ use OCP\SystemTag\ISystemTagObjectMapper;
 use OCP\SystemTag\TagNotFoundException;
 use OCP\WorkflowEngine\IManager;
 use OCP\WorkflowEngine\IRuleMatcher;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use Psr\Log\LoggerInterface;
 use Test\TestCase;
@@ -106,11 +107,10 @@ class OperationTest extends TestCase {
 	}
 
 	/**
-	 * @dataProvider dataCheckOperations
-	 *
 	 * @param array[] $matches
 	 * @param array[] $expected
 	 */
+	#[DataProvider(methodName: 'dataCheckOperations')]
 	public function testCheckOperations(int $fileId, string $file, array $matches, array $expected): void {
 		$storage = $this->createMock(IStorage::class);
 
@@ -176,9 +176,7 @@ class OperationTest extends TestCase {
 		];
 	}
 
-	/**
-	 * @dataProvider dataValidateOperation
-	 */
+	#[DataProvider(methodName: 'dataValidateOperation')]
 	public function testValidateOperation(string $operation, array|\Throwable|null $tags, bool $isAdmin, ?int $exceptionCode): void {
 		if ($tags === null) {
 			$this->tagManager->expects($this->never())
@@ -241,9 +239,7 @@ class OperationTest extends TestCase {
 		];
 	}
 
-	/**
-	 * @dataProvider dataIsTaggingPath
-	 */
+	#[DataProvider(methodName: 'dataIsTaggingPath')]
 	public function testIsTaggingPath(string $storageClass, string $storageId, string $path, bool $expected, string $mountPointPath = ''): void {
 		$isLocal = $storageClass === Home::class || $storageClass === Local::class;
 
