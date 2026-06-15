@@ -2,7 +2,7 @@
 	"scripts": {
 		"cs:check": "php-cs-fixer fix --dry-run --diff",
 		"cs:fix": "php-cs-fixer fix",
-		"lint": "find . -name \\*.php -not -path './vendor/*' -not -path './build/*' -print0 | xargs -0 -n1 php -l",
+		"lint": "find . -name \\*.php -not -path './vendor/*' -not -path './vendor-bin/*' -not -path './build/*' -print0 | xargs -0 -n200 php -l",
 		"psalm": "psalm --threads=1",
 		"psalm:dev": "psalm --no-cache --threads=$(nproc)",
 		"psalm:update-baseline": "psalm --threads=1 --update-baseline",
@@ -16,7 +16,7 @@
 		"optimize-autoloader": true,
 		"classmap-authoritative": true,
 		"platform": {
-			"php": "8.1"
+			"php": "8.3"
 		},
 		"sort-packages": true,
 		"allow-plugins": {
@@ -24,7 +24,7 @@
 		}
 	},
 	"require-dev": {
-		"nextcloud/coding-standard": "^1.2.1",
+		"nextcloud/coding-standard": "^v1.5.0",
 		"nextcloud/ocp": "dev-master"
 	},
 	"autoload": {
@@ -33,6 +33,6 @@
 		}
 	},
 	"require": {
-		"bamarni/composer-bin-plugin": "^1.8"
+		"bamarni/composer-bin-plugin": "^1.9.1"
 	}
 }
