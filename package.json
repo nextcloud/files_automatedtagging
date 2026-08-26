@@ -1,6 +1,6 @@
 {
   "name": "files_automatedtagging",
-  "version": "6.0.0",
+  "version": "7.0.0-dev.0",
   "private": true,
   "homepage": "https://github.com/nextcloud/files_automatedtagging",
   "bugs": {
