@@ -1,7 +1,7 @@
 OC.L10N.register(
     "files_automatedtagging",
     {
-    "No tags given" : "Žiadne vybrané štítky",
+    "No tags given" : "Neboli zadané žiadne štítky",
     "At least one of the given tags is invalid" : "Najmenej jeden zadaný štítok je neplatný",
     "Automated tagging" : "Automatické označovanie",
     "Automated tagging of files" : "Automatické označovanie súborov",
