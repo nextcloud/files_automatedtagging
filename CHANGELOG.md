@@ -5,6 +5,15 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 4.0.1 – 2026-10-13
+### Changed
+- Update translations
+- Update dependencies
+
+### Fixed
+- fix: Migrate `getById` to `getFirstNodeById` [#1368](https://github.com/nextcloud/files_automatedtagging/pull/1368)
+- build: Fix release shipped files [#1738](https://github.com/nextcloud/files_automatedtagging/pull/1738)
+
 ## 4.0.0 – 2026-01-22
 ### Changed
 - Require Nextcloud 33
