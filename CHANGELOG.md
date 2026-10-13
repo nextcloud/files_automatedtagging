@@ -5,6 +5,14 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 2.0.4 – 2026-10-13
+### Changed
+* Update translations
+* Update dependencies
+
+### Fixed
+* [build: Fix release shipped files (#1736)](https://github.com/nextcloud/files_automatedtagging/pull/1736)
+
 ## 2.0.3 – 2026-01-22
 ### Fixed
 * [fix: Trigger tagging for per-folder storage groupfolders (#1348)](https://github.com/nextcloud/files_automatedtagging/pull/1348)
