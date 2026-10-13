@@ -5,6 +5,14 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 5.0.1 – 2026-10-13
+### Changed
+- Update translations
+- Update dependencies
+
+### Fixed
+- build: Fix release shipped files [#1739](https://github.com/nextcloud/files_automatedtagging/pull/1739)
+
 ## 5.0.0 – 2026-05-11
 ### Changed
 - Require Nextcloud 34
