@@ -47,10 +47,12 @@ appstore: clean build
 	--exclude=/node_modules \
 	--exclude=/src \
 	--exclude=/tests \
+	--exclude=/vendor-bin \
 	--exclude=/babel.config.js \
 	--exclude=/composer.* \
 	--exclude=/.drone.yml \
 	--exclude=/.eslintrc.js \
+	--exclude=/eslint.config.mjs \
 	--exclude=/.gitattributes \
 	--exclude=/.gitignore \
 	--exclude=/.l10nignore \
@@ -65,6 +67,7 @@ appstore: clean build
 	--exclude=/translationfiles \
 	--exclude=/.tx \
 	--exclude=/webpack.js \
+	--exclude=/webpack.config.js \
 	--exclude=/README.md \
 	$(project_dir)/ $(sign_dir)/$(app_name)
 	tar -czf $(build_dir)/$(app_name).tar.gz \
