@@ -1,4 +1,4 @@
-# Automated tagging of files for Nextcloud Flow
+# Automated file tagging for Nextcloud Flow
 
 [![REUSE status](https://api.reuse.software/badge/github.com/nextcloud/files_automatedtagging)](https://api.reuse.software/info/github.com/nextcloud/files_automatedtagging)
 
