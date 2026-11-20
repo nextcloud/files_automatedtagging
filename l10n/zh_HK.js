@@ -8,6 +8,7 @@ OC.L10N.register(
     "File is changed" : "檔案已變更",
     "Automatically tag files based on factors such as filetype, user group memberships, time and more." : "根據檔案類型，用戶組成員資格，時間等因素自動標記檔案。",
     "Each rule group consists of one or more rules. A request matches a group if all rules evaluate to true. On uploading a file all defined groups are evaluated and when matching, the given collaborative tags are assigned to the file." : "每個規則組由一個或多個規則組成。如果所有規則評估為真，則請求與組匹配。在上傳檔案時，將對所有定義的組進行評估，並在匹配時將給定的協作標籤分配給該檔案。",
+    "Automated file tagging" : "自動檔案標記",
     "Automatically assign collaborative tags to files based on conditions" : "根據條件自動將協作標籤分配給檔案",
     "Tag a file" : "標記一個檔案",
     "Files automated tagging" : "檔案自動標記",
